@@ -37,21 +37,88 @@ namespace CanteenSystem.Web.Controllers
             var mealMenu = await canteenSystemDbContext.FirstOrDefaultAsync();
             if (mealMenu != null)
             {
-                var cart = new Cart
-                {
+                var availableDate = mealMenu.MealMenuAvailabilities.
+                    Where(x => x.Id == availabilityDateId).FirstOrDefault().AvailabilityDate;
 
-                    MealMenuId = mealMenu.Id,
-                    MealAvailableDate = mealMenu.MealMenuAvailabilities.Where(x => x.Id == availabilityDateId).FirstOrDefault().AvailabilityDate,
-                    Price = mealMenu.Price,
-                    Quantity = 1,
-                    UserProfileId = userProfileId
-                };
-                _context.Add(cart);
-                _context.SaveChanges();
+                var isExistingOrder = _context.Carts.FirstOrDefault(x => x.MealMenuId == menuId &&
+                x.MealAvailableDate == availableDate && x.UserProfileId == userProfileId);
+                if (isExistingOrder == null)
+                {
+                    var cart = new Cart
+                    {
+                        MealMenuId = mealMenu.Id,
+                        MealAvailableDate = availableDate,
+                        Price = mealMenu.Price,
+                        Quantity = 1,
+                        CreatedDate = DateTime.Now,
+                        UpdatedDate = DateTime.Now,
+                        UserProfileId = userProfileId
+                    };
+                    _context.Add(cart);
+                    _context.SaveChanges();
+                }
+                else {
+                    return Json(new { Status = false });
+                }
             }
 
             return Json(new { Status = true });
         }
+
+
+        [Route("Carts/RemoveFromCart/{cartId}")]
+        [HttpPost]
+        public async Task<IActionResult> RemoveFromCart(int cartId)
+        {
+            try
+            {
+                var cart = await _context.Carts.FindAsync(cartId);
+                _context.Carts.Remove(cart);
+                await _context.SaveChangesAsync(); 
+                return Json(new { Status = true });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Status = false });
+            }
+        }
+
+
+
+        [Route("Carts/UpdateCartQuantity/{cartId}/{selectedQuantity}")]
+        [HttpPost]
+        public async Task<IActionResult> UpdateQuantity(int cartId,int selectedQuantity)
+        {
+            try
+            {
+                var cart = await _context.Carts.FindAsync(cartId);
+                if (cart != null)
+                {
+                    var mealMenuAvailabilities =  _context.MealMenuAvailabilities
+                        .Where(x=>x.MealMenuId == cart.MealMenuId &&
+                        x.AvailabilityDate == cart.MealAvailableDate).FirstOrDefault();
+                    if (mealMenuAvailabilities != null)
+                    {
+                        if (mealMenuAvailabilities.Quantity > 1 && mealMenuAvailabilities.Quantity >= cart.Quantity + selectedQuantity)
+                        {
+                            cart.Quantity += selectedQuantity;
+                            _context.Update(cart);
+                            await _context.SaveChangesAsync();
+                        }
+                        else {
+                            return Json(new { Message = "Selected quantity is not available." });
+                        }
+                    }
+                }
+               
+                return Json(new { Message = "" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Message = "" });
+            }
+        }
+
 
         // GET: Carts/Details/5
         public async Task<IActionResult> Details(int? id)

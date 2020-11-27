@@ -45,11 +45,11 @@ namespace CanteenSystem.Web.Models
             {
                 entity.ToTable("Cart");
 
-                entity.Property(e => e.CreatedDate).HasColumnType("decimal(18, 0)");
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.MealAvailableDate).HasColumnType("datetime");
 
-                entity.Property(e => e.UpdatedDate).HasColumnType("decimal(18, 0)");
+                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
 
                 entity.HasOne(d => d.MealMenu)
                     .WithMany(p => p.Carts)

@@ -1,6 +1,6 @@
 ﻿@model CanteenSystem.Web.ViewModel.MealMenuCollectionModel
 @using Microsoft.AspNetCore.Identity
- 
+
 @inject SignInManager<ApplicationUser> SignInManager
 @using Microsoft.AspNetCore.Authorization
 @using System.Security.Claims;
@@ -50,7 +50,7 @@
 </form>
 <br />
 <br />
-
+<div class="alert " style="display:none" id="statusMessage"> </div>
 <table class="table">
     <thead>
         <tr>
@@ -107,7 +107,7 @@
                         @item.MealType
                     </td>
                     <td>
-                        <a onclick="addToCart(@(item.Id),@(item.AvailabililtyDateId),@(userId))" href="#">Add to Card</a>
+                        <a onclick="addToCart(@(item.Id),@(item.AvailabililtyDateId),@(userId),'@(item.Name)')" href="#">Add to Card</a>
                     </td>
                 </tr>
             }
@@ -117,12 +117,26 @@
 
 <script>
 
-    function addToCart(menuId, availabilityDateId, userId) {
+    function addToCart(menuId, availabilityDateId, userId, menuName) {
         $.ajax({
             method: "post",
-            url: "/carts/AddToCart/" + menuId + "/" + availabilityDateId + "/" + userId, success: function (result) {
-
+            url: "/carts/AddToCart/" + menuId + "/" + availabilityDateId + "/" + userId,
+            success: function (result) { 
+                $('#statusMessage').show(); 
+                if (result.status) {
+                  
+                    $('#statusMessage').addClass("alert-success  w-100");
+                    $('#statusMessage').html("<span>" + menuName + " is added to the cart</span>");
+                } else {
+                    $('#statusMessage').addClass("alert-danger  w-100");
+                    $('#statusMessage').html("<span>" + menuName + " has already been added to the cart</span>");
+                 }
+                setTimeout(hideStatusMessage, 2000);
             }
         });
-    } 
+    }
+
+    function hideStatusMessage() {
+        $('#statusMessage').hide();
+    }
 </script>

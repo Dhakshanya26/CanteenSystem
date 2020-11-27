@@ -183,7 +183,7 @@ namespace CanteenSystem.Web.Controllers
                 listOfValues = listOfValues.Where(y => y.MealTypeId == model.SelectedMealType).ToList();
             }
 
-            var mealMenuList = listOfValues.SelectMany(x => x.MealMenuAvailabilities).Select(x => {
+            var mealMenuList = listOfValues.SelectMany(x => x.MealMenuAvailabilities).Where(x=>x.Quantity>=1).Select(x => {
                 decimal price = 0;
                 decimal? wasPrice = null;
 

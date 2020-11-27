@@ -11,8 +11,8 @@ namespace CanteenSystem.Web.Models
         public int MealMenuId { get; set; }
         public int Quantity { get; set; }
         public double Price { get; set; }
-        public decimal CreatedDate { get; set; }
-        public decimal UpdatedDate { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public DateTime UpdatedDate { get; set; }
         public DateTime MealAvailableDate { get; set; }
 
         public int UserProfileId { get; set; }

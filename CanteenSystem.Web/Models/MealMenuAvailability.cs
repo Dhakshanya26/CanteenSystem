@@ -10,7 +10,7 @@ namespace CanteenSystem.Web.Models
         public int Id { get; set; }
         public int MealMenuId { get; set; }
         public DateTime AvailabilityDate { get; set; }
-
+        public int Quantity { get; set; }
         public virtual MealMenu MealMenu { get; set; }
     }
 }
