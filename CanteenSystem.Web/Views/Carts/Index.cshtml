@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CanteenSystem.Web.Models.Cart>
+﻿@model IEnumerable<CanteenSystem.Dto.Models.Cart>
 
 @{
     ViewData["Title"] = "Index";
@@ -56,7 +56,7 @@
                new SelectListItem("4","4")
            }), new
            {
-               onchange = @"updateQuantity("+ this.value +","+(item.Id)+ ",'" +(item.MealMenu.MealName)+"')"
+               onchange = @"updateQuantity(" +","+(item.Id)+ ",'" +(item.MealMenu.MealName)+"')"
            })
         </td>
         <td>

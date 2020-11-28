@@ -5,12 +5,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using CanteenSystem.Web.Models;
 using IdentityModel;
 using CanteenSystem.Web.ViewModel;
+using CanteenSystem.Dto.Models;
+using CanteenSystem.Dal;
 
 namespace CanteenSystem.Web.Controllers
-{ 
+{
     public class MealMenusController : Controller
     {
         private readonly CanteenSystemDbContext _context;

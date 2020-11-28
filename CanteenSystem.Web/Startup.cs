@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CanteenSystem.Service;
 using CanteenSystem.Web.Controllers;
-using CanteenSystem.Web.Models;
+using CanteenSystem.Dto.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -17,6 +17,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using CanteenSystem.Dal;
 
 namespace CanteenSystem.Web
 {

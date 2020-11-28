@@ -1,23 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using CanteenSystem.Web.Models;
 using CanteenSystem.Web.ViewModel;
+using CanteenSystem.Dal;
+using CanteenSystem.Service;
 
 namespace CanteenSystem.Web.Controllers
 {
     public class CardsController : Controller
     {
         private readonly CanteenSystemDbContext _context;
-
-        public CardsController(CanteenSystemDbContext context)
+        private readonly ICardsService _cardsservice;
+        public CardsController(CanteenSystemDbContext context, ICardsService cardsservice)
         {
             _context = context;
+            _cardsservice = cardsservice;
         }
+
 
         // GET: Cards
         public async Task<IActionResult> Student(int? id,string message = null)

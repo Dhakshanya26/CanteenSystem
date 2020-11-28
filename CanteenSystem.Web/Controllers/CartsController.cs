@@ -5,19 +5,23 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using CanteenSystem.Web.Models;
 using Newtonsoft.Json;
+using CanteenSystem.Dal;
+using CanteenSystem.Dto.Models;
+using CanteenSystem.Service;
 
 namespace CanteenSystem.Web.Controllers
 {
     public class CartsController : Controller
     {
         private readonly CanteenSystemDbContext _context;
-
-        public CartsController(CanteenSystemDbContext context)
+        private readonly ICartsService _cartsService;
+        public CartsController(CanteenSystemDbContext context, ICartsService cartsService)
         {
             _context = context;
+            _cartsService = cartsService;
         }
+
 
         // GET: Carts
         public async Task<IActionResult> Index(int userProfileId)
