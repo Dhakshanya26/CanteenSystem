@@ -27,7 +27,8 @@ namespace CanteenSystem.Web.Controllers
         // GET: Orders
         public async Task<IActionResult> Index()
         {
-            var canteenSystemDbContext = _context.Orders.Include(o => o.UserProfile);
+            var canteenSystemDbContext = _context.Orders.Include(o => o.UserProfile)
+                .Include(o => o.Payments);
             return View(await canteenSystemDbContext.ToListAsync());
         }
 
@@ -35,7 +36,7 @@ namespace CanteenSystem.Web.Controllers
         public async Task<IActionResult> StudentOrder(int userId)
         {
             var canteenSystemDbContext = _context.Orders.Where(x => x.UserProfileId == userId)
-                .Include(o => o.UserProfile);
+                .Include(o => o.UserProfile).Include(o => o.Payments);
                
             var orders = await canteenSystemDbContext.ToListAsync();
             return View(orders);

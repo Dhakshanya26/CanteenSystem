@@ -176,10 +176,14 @@ namespace CanteenSystem.Web.Controllers
 
                     _context.Add(order);
                     _context.SaveChanges();
+
+                    var cartToBeRemoved = await _context.Carts.Where(c=>c.UserProfileId == userId).ToListAsync();
+                    _context.Carts.RemoveRange(cartToBeRemoved);
+                    await _context.SaveChangesAsync();
                 }
 
                 return RedirectToAction("OrderConfirmation", "Orders",
-                    new OrderConfirmationModel (  $"Your order has been confirmed and the reference number is {orderReferenceNumber}. <br>" +
+                    new OrderConfirmationModel (  $"Your order has been confirmed and the reference number is {orderReferenceNumber}." +
                     $"Please pay at till and collect your order" ));
             }
             catch (Exception ex)
@@ -187,15 +191,34 @@ namespace CanteenSystem.Web.Controllers
                 return Json(new { Status = false, Message = "Unexpected error occurred, please try again later." });
             }
         }
+
         [Route("Carts/confirmOrderAndPayNow/{userId}")]
-        public IActionResult ConfirmOrderPayNow(int id)
+        public async Task<IActionResult> ConfirmOrderPayNow(int userId)
         {
-            var cartItems = await _context.Carts.Where(x => x.UserProfileId == id).ToListAsync();
-            return View(new );
+            var cartItems = await _context.Carts.Where(x => x.UserProfileId == userId).ToListAsync();
+            decimal totalPrice = 0M;
+            if (cartItems != null)
+            {
+
+                var orderItems = new List<OrderItem>();
+              
+                cartItems.ForEach(x => {
+                    totalPrice += (decimal)x.Price * x.Quantity;
+                    orderItems.Add(new OrderItem
+                    {
+                        MealMenuId = x.MealMenuId,
+                        MealMenuOrderDate = x.MealAvailableDate,
+                        Price = x.Price,
+                        Quantity = x.Quantity
+                    });
+
+                });
+            }
+                return View("confirmOrderAndPayNow",new CardModel { Amount=  totalPrice});
         }
 
 
-        
+        [Route("Carts/confirmOrderAndPayNow/{userId}")]
         [HttpPost]
         public async Task<IActionResult> ConfirmOrderAndPayNow(int userId)
         {
@@ -231,13 +254,28 @@ namespace CanteenSystem.Web.Controllers
                         UserProfileId = userId,
                         OrderItems = orderItems
                     };
+                    
 
                     _context.Add(order);
                     _context.SaveChanges();
+
+                    var paymentReferenceNumber = $"PAYMENT{r}";
+                    var payment = new Payment
+                    {
+                        PaymentDate = DateTime.Now,
+                        PaymentReference = paymentReferenceNumber,
+                        PaymentAmount = (double)totalPrice,
+                        OrderId = order.Id 
+                    };
+                    _context.Add(payment);
+                    _context.SaveChanges();
+                    var cartToBeRemoved = _context.Carts.Where(c => c.UserProfileId == userId);
+                    _context.Carts.RemoveRange(cartToBeRemoved);
+                    await _context.SaveChangesAsync();
                 }
 
                 return RedirectToAction("OrderConfirmation", "Orders",
-                    new OrderConfirmationModel($"Your order has been confirmed and the reference number is {orderReferenceNumber}. <br>" +
+                    new OrderConfirmationModel($"Your order has been confirmed and the reference number is {orderReferenceNumber}. " +
                     $"Please collect your order"));
             }
             catch (Exception ex)

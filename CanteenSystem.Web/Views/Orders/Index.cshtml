@@ -25,6 +25,9 @@
                 Student Rollnumber
             </th>
             <th>
+                Is Paid
+            </th>
+            <th>
                 View detail
             </th>
             <th></th>
@@ -33,26 +36,29 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.OrderReference)
-                </td>
-                <td>
-                   £ @Html.DisplayFor(modelItem => item.TotalPrice)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreatedDate.Date)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserProfile.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserProfile.RollNumber)
-                </td>
-                <td>
-                    <a href="/OrderItems/Index/@item.Id">Details</a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderReference)
+            </td>
+            <td>
+                £ @Html.DisplayFor(modelItem => item.TotalPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserProfile.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserProfile.RollNumber)
+            </td>
+            <td>
+               @(item.Payments != null && item.Payments.Any() ?"Yes":"No")
+            </td>
+            <td>
+                <a href="/OrderItems/Index/@item.Id">Details</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>
