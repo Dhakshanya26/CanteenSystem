@@ -3977,3 +3977,132 @@ Error Number:544,State:1,Class:16
 2020-11-28 18:14:12.793 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
 2020-11-28 18:14:13.559 +00:00 [WRN] No type was specified for the decimal property 'AvailableBalance' on entity type 'Card'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
 2020-11-28 18:14:16.944 +00:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2020-11-28 19:12:43.189 +00:00 [INF] Starting host...
+2020-11-28 19:12:45.609 +00:00 [WRN] 'AddEntityFramework*' was called on the service provider, but 'UseInternalServiceProvider' wasn't called in the DbContext options configuration. Consider removing the 'AddEntityFramework*' call, as in most cases it's not needed and may cause conflicts with other products and services registered in the same service provider.
+2020-11-28 19:12:47.170 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-28 19:12:55.557 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-28 19:13:00.199 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-28 19:13:00.991 +00:00 [WRN] No type was specified for the decimal property 'AvailableBalance' on entity type 'Card'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+2020-11-28 19:13:03.268 +00:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2020-11-28 19:15:33.690 +00:00 [INF] Starting host...
+2020-11-28 19:15:36.122 +00:00 [WRN] 'AddEntityFramework*' was called on the service provider, but 'UseInternalServiceProvider' wasn't called in the DbContext options configuration. Consider removing the 'AddEntityFramework*' call, as in most cases it's not needed and may cause conflicts with other products and services registered in the same service provider.
+2020-11-28 19:15:44.456 +00:00 [WRN] No type was specified for the decimal property 'AvailableBalance' on entity type 'Card'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+2020-11-28 19:28:47.606 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-28 19:28:47.672 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-28 19:28:47.703 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-28 19:28:47.747 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-28 19:29:45.739 +00:00 [INF] Starting host...
+2020-11-28 19:29:48.429 +00:00 [WRN] 'AddEntityFramework*' was called on the service provider, but 'UseInternalServiceProvider' wasn't called in the DbContext options configuration. Consider removing the 'AddEntityFramework*' call, as in most cases it's not needed and may cause conflicts with other products and services registered in the same service provider.
+2020-11-28 19:29:49.899 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-28 19:29:52.495 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-28 19:29:59.186 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-28 19:29:59.996 +00:00 [WRN] No type was specified for the decimal property 'AvailableBalance' on entity type 'Card'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+2020-11-28 19:30:02.181 +00:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2020-11-28 19:32:51.470 +00:00 [INF] Starting host...
+2020-11-28 19:32:53.982 +00:00 [WRN] 'AddEntityFramework*' was called on the service provider, but 'UseInternalServiceProvider' wasn't called in the DbContext options configuration. Consider removing the 'AddEntityFramework*' call, as in most cases it's not needed and may cause conflicts with other products and services registered in the same service provider.
+2020-11-28 19:32:58.920 +00:00 [WRN] No type was specified for the decimal property 'AvailableBalance' on entity type 'Card'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+2020-11-28 19:36:37.622 +00:00 [INF] Starting host...
+2020-11-28 19:36:41.016 +00:00 [WRN] 'AddEntityFramework*' was called on the service provider, but 'UseInternalServiceProvider' wasn't called in the DbContext options configuration. Consider removing the 'AddEntityFramework*' call, as in most cases it's not needed and may cause conflicts with other products and services registered in the same service provider.
+2020-11-28 19:36:48.304 +00:00 [WRN] No type was specified for the decimal property 'AvailableBalance' on entity type 'Card'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+2020-11-28 19:58:05.024 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-28 20:03:42.593 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-28 20:05:31.736 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-28 20:06:19.329 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-28 20:06:20.237 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-28 20:06:21.085 +00:00 [ERR] An unhandled exception has occurred while executing the request.
+System.ArgumentNullException: Value cannot be null. (Parameter 'userName')
+   at Microsoft.AspNetCore.Identity.UserManager`1.FindByNameAsync(String userName)
+   at CanteenSystem.Web.Controllers.LoginController.Login(LoginModel model, String returnUrl) in /Users/dhakshanyavijay/Documents/GitHub/CanteenSystem/CanteenSystem.Web/Controllers/LoginController.cs:line 57
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2020-11-28 20:06:51.927 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-28 20:06:52.228 +00:00 [ERR] An unhandled exception has occurred while executing the request.
+System.ArgumentNullException: Value cannot be null. (Parameter 'userName')
+   at Microsoft.AspNetCore.Identity.UserManager`1.FindByNameAsync(String userName)
+   at CanteenSystem.Web.Controllers.LoginController.Login(LoginModel model, String returnUrl) in /Users/dhakshanyavijay/Documents/GitHub/CanteenSystem/CanteenSystem.Web/Controllers/LoginController.cs:line 57
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2020-11-28 20:07:03.043 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-28 20:07:13.653 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-28 20:07:48.397 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-28 20:08:05.977 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-28 20:08:30.838 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-28 20:08:50.625 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-28 20:09:01.466 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-28 20:10:51.146 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-28 20:10:51.443 +00:00 [WRN] User password validation failed: PasswordRequiresLower.
+2020-11-28 20:12:15.952 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-28 20:12:19.032 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-28 20:13:18.276 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-28 20:13:21.412 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-28 20:13:21.792 +00:00 [ERR] An unhandled exception has occurred while executing the request.
+System.ArgumentNullException: Value cannot be null. (Parameter 'userName')
+   at Microsoft.AspNetCore.Identity.UserManager`1.FindByNameAsync(String userName)
+   at CanteenSystem.Web.Controllers.LoginController.Login(LoginModel model, String returnUrl) in /Users/dhakshanyavijay/Documents/GitHub/CanteenSystem/CanteenSystem.Web/Controllers/LoginController.cs:line 57
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2020-11-28 20:13:50.102 +00:00 [INF] Starting host...
+2020-11-28 20:13:52.290 +00:00 [WRN] 'AddEntityFramework*' was called on the service provider, but 'UseInternalServiceProvider' wasn't called in the DbContext options configuration. Consider removing the 'AddEntityFramework*' call, as in most cases it's not needed and may cause conflicts with other products and services registered in the same service provider.
+2020-11-28 20:13:53.689 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-28 20:14:00.103 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-28 20:14:03.049 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-28 20:14:15.258 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-28 20:14:15.987 +00:00 [WRN] No type was specified for the decimal property 'AvailableBalance' on entity type 'Card'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+2020-11-28 20:14:45.090 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-28 20:14:45.587 +00:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2020-11-28 20:18:06.245 +00:00 [INF] AuthenticationScheme: Identity.Application signed out.
+2020-11-28 20:18:06.270 +00:00 [INF] AuthenticationScheme: Identity.External signed out.
+2020-11-28 20:18:06.271 +00:00 [INF] AuthenticationScheme: Identity.TwoFactorUserId signed out.
+2020-11-28 20:18:29.766 +00:00 [WRN] Invalid password for user.
+2020-11-28 20:18:33.164 +00:00 [WRN] Invalid password for user.
+2020-11-28 20:23:06.423 +00:00 [INF] Starting host...
+2020-11-28 20:23:09.348 +00:00 [WRN] 'AddEntityFramework*' was called on the service provider, but 'UseInternalServiceProvider' wasn't called in the DbContext options configuration. Consider removing the 'AddEntityFramework*' call, as in most cases it's not needed and may cause conflicts with other products and services registered in the same service provider.
+2020-11-28 20:23:37.246 +00:00 [INF] Starting host...
+2020-11-28 20:23:39.528 +00:00 [WRN] 'AddEntityFramework*' was called on the service provider, but 'UseInternalServiceProvider' wasn't called in the DbContext options configuration. Consider removing the 'AddEntityFramework*' call, as in most cases it's not needed and may cause conflicts with other products and services registered in the same service provider.
+2020-11-28 20:30:09.597 +00:00 [INF] Starting host...
+2020-11-28 20:30:11.973 +00:00 [WRN] 'AddEntityFramework*' was called on the service provider, but 'UseInternalServiceProvider' wasn't called in the DbContext options configuration. Consider removing the 'AddEntityFramework*' call, as in most cases it's not needed and may cause conflicts with other products and services registered in the same service provider.

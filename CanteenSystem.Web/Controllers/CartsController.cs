@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using CanteenSystem.Web.Models;
 using Newtonsoft.Json;
 using CanteenSystem.Web.ViewModel;
+using System.Net.Mail;
+using System.Net;
 
 namespace CanteenSystem.Web.Controllers
 {
@@ -272,7 +274,20 @@ namespace CanteenSystem.Web.Controllers
                     var cartToBeRemoved = _context.Carts.Where(c => c.UserProfileId == userId);
                     _context.Carts.RemoveRange(cartToBeRemoved);
                     await _context.SaveChangesAsync();
+
+                    var userProfiles = await _context.UserProfiles.Where(x => x.Id == userId).ToListAsync();
+                    if (userProfiles != null)
+                    {
+                        var user = userProfiles.FirstOrDefault();
+                        if(user != null)
+                        { 
+                          var body =  ConstructStudentOrderEmail(user.Name, order, true);
+                          SendEmail(user.EmailAddress,user.Name,"CanteenReservation system - Order has been placed successfully",body);
+                        }
+                    } 
                 }
+
+
 
                 return RedirectToAction("OrderConfirmation", "Orders",
                     new OrderConfirmationModel($"Your order has been confirmed and the reference number is {orderReferenceNumber}. " +
@@ -416,6 +431,61 @@ namespace CanteenSystem.Web.Controllers
         }
 
 
+        private string ConstructStudentOrderEmail(string toName, Order order, bool isPaid)
+        {
+            var body = "";
+          
+            body += $"Hi {toName},\n\r"; 
+            if (isPaid)
+            {
+                body += $"Please use your order reference number to collect your order. \n\r";
+            }
+            else
+            {
+                body += $"Please pay at the till and collect your order \n\r";
+            }
+            body += $"Your order reference number is :{order.OrderReference}\n\r";
+            if (isPaid)
+            {
+                body += $"Paid: £ {order.TotalPrice} \n\r";
+            }
+            else
+            {
+                body += $"Need to pay: £ {order.TotalPrice} \n\r";
+            }
+
+            body += $"Please login to the Canteen reservation system to view the order details.\n\r";
+          
+            return body;
+        }
+
+       
+
+        private bool SendEmail(string toEmailAddress, string toName, string subject, string body)
+        {
+            var fromAddress = new MailAddress("canteensystemmaha202018@gmail.com", "Admin");
+            var toAddress = new MailAddress(toEmailAddress, toName);
+            const string fromPassword = "Pa55word1234";
+
+            var smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+            };
+            using (var message = new MailMessage(fromAddress, toAddress)
+            {
+                Subject = subject,
+                Body = body
+            })
+            {
+                smtp.Send(message);
+            }
+            return true;
+        }
 
         private bool CartExists(int id)
         {

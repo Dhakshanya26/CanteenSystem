@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CanteenSystem.Web.Models;
 using CanteenSystem.Web.ViewModel;
+using System.Net.Mail;
+using System.Net;
 
 namespace CanteenSystem.Web.Controllers
 {
@@ -172,5 +174,6 @@ namespace CanteenSystem.Web.Controllers
         {
             return _context.Orders.Any(e => e.Id == id);
         }
+
     }
 }
