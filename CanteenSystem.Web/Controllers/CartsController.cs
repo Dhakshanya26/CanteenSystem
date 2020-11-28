@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CanteenSystem.Web.Models;
 using Newtonsoft.Json;
+using CanteenSystem.Web.ViewModel;
 
 namespace CanteenSystem.Web.Controllers
 {
@@ -24,6 +25,16 @@ namespace CanteenSystem.Web.Controllers
         {
             var canteenSystemDbContext = _context.Carts.Include(c => c.MealMenu).Include(c => c.UserProfile);
             var cartList = await canteenSystemDbContext.ToListAsync();
+
+            var expiredCardList = cartList.Where(x => x.MealAvailableDate < DateTime.Now);
+
+            if (expiredCardList != null && expiredCardList.Any())
+            {
+                _context.RemoveRange(expiredCardList);
+                cartList = await _context.Carts.Include(c => c.MealMenu).Include(c => c.UserProfile).ToListAsync();
+                  
+            } 
+
             cartList = cartList.Where(x => x.UserProfileId == userProfileId)?.ToList();
             return View(cartList);
         }
@@ -32,37 +43,45 @@ namespace CanteenSystem.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> AddToCart(int menuId, int availabilityDateId, int userProfileId)
         {
-            var canteenSystemDbContext = _context.MealMenus.Where(x => x.Id == menuId &&
-            x.MealMenuAvailabilities.Any(y => y.Id == availabilityDateId)).Include(x => x.MealMenuAvailabilities);
-            var mealMenu = await canteenSystemDbContext.FirstOrDefaultAsync();
-            if (mealMenu != null)
+            try
             {
-                var availableDate = mealMenu.MealMenuAvailabilities.
-                    Where(x => x.Id == availabilityDateId).FirstOrDefault().AvailabilityDate;
-
-                var isExistingOrder = _context.Carts.FirstOrDefault(x => x.MealMenuId == menuId &&
-                x.MealAvailableDate == availableDate && x.UserProfileId == userProfileId);
-                if (isExistingOrder == null)
+                var canteenSystemDbContext = _context.MealMenus.Where(x => x.Id == menuId &&
+                x.MealMenuAvailabilities.Any(y => y.Id == availabilityDateId)).Include(x => x.MealMenuAvailabilities);
+                var mealMenu = await canteenSystemDbContext.FirstOrDefaultAsync();
+                if (mealMenu != null)
                 {
-                    var cart = new Cart
-                    {
-                        MealMenuId = mealMenu.Id,
-                        MealAvailableDate = availableDate,
-                        Price = mealMenu.Price,
-                        Quantity = 1,
-                        CreatedDate = DateTime.Now,
-                        UpdatedDate = DateTime.Now,
-                        UserProfileId = userProfileId
-                    };
-                    _context.Add(cart);
-                    _context.SaveChanges();
-                }
-                else {
-                    return Json(new { Status = false });
-                }
-            }
+                    var availableDate = mealMenu.MealMenuAvailabilities.
+                        Where(x => x.Id == availabilityDateId).FirstOrDefault().AvailabilityDate;
 
-            return Json(new { Status = true });
+                    var isExistingOrder = _context.Carts.FirstOrDefault(x => x.MealMenuId == menuId &&
+                    x.MealAvailableDate == availableDate && x.UserProfileId == userProfileId);
+                    if (isExistingOrder == null)
+                    {
+                        var cart = new Cart
+                        {
+                            MealMenuId = mealMenu.Id,
+                            MealAvailableDate = availableDate,
+                            Price = mealMenu.Price,
+                            Quantity = 1,
+                            CreatedDate = DateTime.Now,
+                            UpdatedDate = DateTime.Now,
+                            UserProfileId = userProfileId
+                        };
+                        _context.Add(cart);
+                        _context.SaveChanges();
+                    }
+                    else
+                    {
+                        return Json(new { Status = false });
+                    }
+                }
+
+                return Json(new { Status = true });
+            }
+            catch (Exception ex) {
+                //jhgh
+            }
+            return Json(new { Status = false });
         }
 
 
@@ -101,25 +120,131 @@ namespace CanteenSystem.Web.Controllers
                     {
                         if (mealMenuAvailabilities.Quantity > 1 && mealMenuAvailabilities.Quantity >= cart.Quantity + selectedQuantity)
                         {
-                            cart.Quantity += selectedQuantity;
+                            cart.Quantity = selectedQuantity;
                             _context.Update(cart);
                             await _context.SaveChangesAsync();
                         }
                         else {
-                            return Json(new { Message = "Selected quantity is not available." });
+                            return Json(new {Status= false, Message = "Selected quantity is not available." });
                         }
                     }
                 }
-               
-                return Json(new { Message = "" });
+
+                return Json(new { Status = true, Message = "Updated the quantity" });
             }
             catch (Exception ex)
             {
-                return Json(new { Message = "" });
+                return Json(new { Status = false, Message = "Unexpected error occurred, please try again later." });
             }
         }
 
+        [Route("carts/confirmOrderAndPayAtTill/{userId}")] 
+        
+        public async Task<IActionResult> ConfirmOrderAndPayAtTill(int userId)
+        {
+            try
+            {
+                Random generator = new Random();
+                int r = generator.Next(1000, 10000000);
+                var orderReferenceNumber = $"ORDER{r}";
+                var cartItems = await _context.Carts.Where(x=>x.UserProfileId == userId).ToListAsync();
+                if (cartItems != null)
+                {
+                  
+                    var orderItems = new List<OrderItem>();
+                    decimal totalPrice = 0M;
+                    cartItems.ForEach(x=>{
+                        totalPrice += (decimal)x.Price * x.Quantity;
+                              orderItems.Add(new OrderItem {
+                           MealMenuId =x.MealMenuId,
+                              MealMenuOrderDate = x.MealAvailableDate,
+                            Price = x.Price,
+                            Quantity = x.Quantity  
+                        });
 
+                    });
+                    
+                    var order = new Order
+                    {
+                        CreatedDate =  DateTime.Now,
+                        UpdatedDate = DateTime.Now,
+                        OrderReference = orderReferenceNumber,
+                        TotalPrice = (double)totalPrice,
+                        UserProfileId = userId ,
+                        OrderItems = orderItems
+                    };
+
+                    _context.Add(order);
+                    _context.SaveChanges();
+                }
+
+                return RedirectToAction("OrderConfirmation", "Orders",
+                    new OrderConfirmationModel (  $"Your order has been confirmed and the reference number is {orderReferenceNumber}. <br>" +
+                    $"Please pay at till and collect your order" ));
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Status = false, Message = "Unexpected error occurred, please try again later." });
+            }
+        }
+        [Route("Carts/confirmOrderAndPayNow/{userId}")]
+        public IActionResult ConfirmOrderPayNow(int id)
+        {
+            var cartItems = await _context.Carts.Where(x => x.UserProfileId == id).ToListAsync();
+            return View(new );
+        }
+
+
+        
+        [HttpPost]
+        public async Task<IActionResult> ConfirmOrderAndPayNow(int userId)
+        {
+            try
+            {
+                Random generator = new Random();
+                int r = generator.Next(1000, 10000000);
+                var orderReferenceNumber = $"ORDER{r}";
+                var cartItems = await _context.Carts.Where(x => x.UserProfileId == userId).ToListAsync();
+                if (cartItems != null)
+                {
+
+                    var orderItems = new List<OrderItem>();
+                    decimal totalPrice = 0M;
+                    cartItems.ForEach(x => {
+                        totalPrice += (decimal)x.Price * x.Quantity;
+                        orderItems.Add(new OrderItem
+                        {
+                            MealMenuId = x.MealMenuId,
+                            MealMenuOrderDate = x.MealAvailableDate,
+                            Price = x.Price,
+                            Quantity = x.Quantity
+                        });
+
+                    });
+
+                    var order = new Order
+                    {
+                        CreatedDate = DateTime.Now,
+                        UpdatedDate = DateTime.Now,
+                        OrderReference = orderReferenceNumber,
+                        TotalPrice = (double)totalPrice,
+                        UserProfileId = userId,
+                        OrderItems = orderItems
+                    };
+
+                    _context.Add(order);
+                    _context.SaveChanges();
+                }
+
+                return RedirectToAction("OrderConfirmation", "Orders",
+                    new OrderConfirmationModel($"Your order has been confirmed and the reference number is {orderReferenceNumber}. <br>" +
+                    $"Please collect your order"));
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Status = false, Message = "Unexpected error occurred, please try again later." });
+            }
+        }
         // GET: Carts/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -251,6 +376,8 @@ namespace CanteenSystem.Web.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+
 
         private bool CartExists(int id)
         {
