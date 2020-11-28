@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using CanteenSystem.Web.Models;
+using CanteenSystem.Dto.Models;
+using CanteenSystem.Dal;
 
 namespace CanteenSystem.Web.Controllers
 {

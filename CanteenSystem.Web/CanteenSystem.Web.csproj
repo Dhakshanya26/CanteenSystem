@@ -1966,6 +1966,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CanteenSystem.Dal\CanteenSystem.Dal.csproj" />
     <ProjectReference Include="..\CanteenSystem.Service\CanteenSystem.Service.csproj" />
   </ItemGroup>
 

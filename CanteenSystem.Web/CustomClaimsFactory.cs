@@ -1,8 +1,7 @@
-﻿using CanteenSystem.Web.Models;
+﻿using CanteenSystem.Dto.Models;
 using IdentityModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
