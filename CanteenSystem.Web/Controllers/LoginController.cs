@@ -55,6 +55,10 @@ namespace CanteenSystem.Web.Controllers
         [Route("login")]
         public async Task<IActionResult> Login(LoginModel model, string returnUrl = null)
         {
+            if(!ModelState.IsValid)
+            {
+                return View(model);
+            }
             var user = await userManager.FindByNameAsync(model.Username);
             if (user != null && await userManager.CheckPasswordAsync(user, model.Password))
             {
