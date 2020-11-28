@@ -4,12 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using CanteenSystem.Web.Models;
+using Microsoft.EntityFrameworkCore; 
 using Newtonsoft.Json;
 using CanteenSystem.Web.ViewModel;
 using System.Net.Mail;
 using System.Net;
+using CanteenSystem.Dal;
+using CanteenSystem.Dto.Models;
 
 namespace CanteenSystem.Web.Controllers
 {
