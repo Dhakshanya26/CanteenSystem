@@ -1,14 +1,20 @@
-﻿@model IEnumerable<CanteenSystem.Dto.Models.Cart>
+﻿@model IEnumerable<CanteenSystem.Web.Models.Cart>
 
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<ApplicationUser> SignInManager
+@using Microsoft.AspNetCore.Authorization
+@using System.Security.Claims;
+@inject IAuthorizationService AuthorizationService
+@inject UserManager<ApplicationUser> UserManager
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Cart";
+    var userClaimId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.UserData);
+    var userId = userClaimId == null ? 0 : Convert.ToInt32(userClaimId.Value);
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<h1>Your Cart</h1>
+<div class="alert " style="display:none" id="statusMessage"> </div>
 <table class="table">
     <thead>
         <tr>
@@ -21,11 +27,11 @@
             <th>
                 @Html.DisplayNameFor(model => model.Price)
             </th>
-            
+
             <th>
                 @Html.DisplayNameFor(model => model.MealAvailableDate)
             </th>
-            
+
             <th></th>
         </tr>
     </thead>
@@ -42,41 +48,55 @@
         else
         {
 
-        foreach (var item in Model)
-        {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.MealMenu.MealName)
-        </td>
-        <td> 
-            @Html.DropDownListFor(modelItem=> item.Quantity,new SelectList(new List<SelectListItem> {
-           new SelectListItem("1","1"),
-               new SelectListItem("2","2"),
-               new SelectListItem("3","3"),
-               new SelectListItem("4","4")
-           }), new
-           {
-               onchange = @"updateQuantity(" +","+(item.Id)+ ",'" +(item.MealMenu.MealName)+"')"
-           })
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td> 
-        <td>
-            @Html.DisplayFor(modelItem => item.MealAvailableDate)
-        </td>
-        
-        <td>
-            <a onclick="removeFromCart(@(item.Id),'@(item.MealMenu.MealName)')" href="#">Remove</a>
-        </td>
-    </tr>
-        }
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MealMenu.MealName)
+                    </td>
+                    <td>
+                        @Html.DropDownListFor(modelItem => item.Quantity, new SelectList(new List<SelectListItem> {
+                       new SelectListItem("1","1"),
+                       new SelectListItem("2","2"),
+                       new SelectListItem("3","3"),
+                       new SelectListItem("4","4")
+                }, "Text", "Value"), new
+                        {
+                            onchange = @"updateQuantity(this.value" + "," + (item.Id) + ",'" + (item.MealMenu.MealName) + "')"
+                        })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MealAvailableDate)
+                    </td>
+
+                    <td>
+                        <a onclick="removeFromCart(@(item.Id),'@(item.MealMenu.MealName)')" href="#">Remove</a>
+                    </td>
+                </tr>
+            }
         }
     </tbody>
 </table>
 
-<script>
-    function updateQuantity(selectedQuantity,cartId, menuName) {
+@if (Model == null || !Model.Any())
+{
+    <div class="text-center">
+        <a class="btn btn-primary" href="/home"> Go to home</a>
+    </div>
+}
+else
+{
+    <div class="text-center">
+
+        <a type="button" class="btn btn-primary" href="/carts/confirmOrderAndPayNow/@(userId)"> Confirm Order and Pay Now</a>
+        <a type="button" class="btn btn-secondary" href="/carts/confirmOrderAndPayAtTill/@(userId)"> Confirm Order and Pay at Till</a>
+
+    </div>
+}
+<script>function updateQuantity(selectedQuantity, cartId, menuName) {
         $.ajax({
             method: "post",
             url: "/carts/UpdateCartQuantity/" + cartId + '/' + selectedQuantity,
@@ -85,7 +105,7 @@
                 if (result.status) {
 
                     $('#statusMessage').addClass("alert-success  w-100");
-                    $('#statusMessage').html("<span>" + menuName + " quantity has been updated to " + selectedQuantity+"</span>");
+                    $('#statusMessage').html("<span>" + menuName + " - " + result.message + "</span>");
                 } else {
                     $('#statusMessage').addClass("alert-danger  w-100");
                     $('#statusMessage').html("<span> Unexpected error occurred. please try again later</span>");
@@ -104,10 +124,11 @@
 
                     $('#statusMessage').addClass("alert-success  w-100");
                     $('#statusMessage').html("<span>" + menuName + " is removed from the cart</span>");
+                    location.reload();
                 } else {
                     $('#statusMessage').addClass("alert-danger  w-100");
                     $('#statusMessage').html("<span> Unexpected error occurred. please try again later</span>");
-                 }
+                }
                 setTimeout(hideStatusMessage, 2000);
             }
         });
@@ -115,5 +136,4 @@
 
     function hideStatusMessage() {
         $('#statusMessage').hide();
-    }
-</script>
+    }</script>

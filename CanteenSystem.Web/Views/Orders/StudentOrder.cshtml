@@ -1,10 +1,10 @@
-﻿@model IEnumerable<CanteenSystem.Dto.Models.Order>
+﻿@model IEnumerable<CanteenSystem.Web.Models.Order>
 
 @{
     ViewData["Title"] = "Orders";
 }
 
-<h1>Available orders</h1>
+<h1>Your orders</h1>
 
 <table class="table">
     <thead>
@@ -17,12 +17,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.CreatedDate)
-            </th>
-            <th>
-                Student Name
-            </th>
-            <th>
-                Student Rollnumber
             </th>
             <th>
                 Is Paid
@@ -47,16 +41,10 @@
                 @Html.DisplayFor(modelItem => item.CreatedDate.Date)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.UserProfile.Name)
+                @(item.Payments != null && item.Payments.Any() ?"Yes":"No")
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.UserProfile.RollNumber)
-            </td>
-            <td>
-               @(item.Payments != null && item.Payments.Any() ?"Yes":"No")
-            </td>
-            <td>
-                <a href="/OrderItems/Index/@item.Id">Details</a>
+                <a asp-action="Index" asp-controller="OrderItems" asp-route-id="@item.Id">Details</a>
             </td>
         </tr>
         }

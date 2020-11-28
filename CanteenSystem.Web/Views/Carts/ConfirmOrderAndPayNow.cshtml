@@ -1,0 +1,83 @@
+﻿@model CanteenSystem.Web.ViewModel.CardModel
+
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@using Microsoft.AspNetCore.Authorization
+@using System.Security.Claims;
+@inject IAuthorizationService AuthorizationService
+@inject UserManager<ApplicationUser> UserManager
+
+@using IdentityModel;
+@{
+    ViewData["Title"] = "Pay now";
+    var userClaimId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.UserData);
+    var userId = userClaimId == null ? 0 : Convert.ToInt32(userClaimId.Value);
+}
+@{
+    ViewData["Title"] = "Details";
+}
+<style>
+    .main-wrapper {
+        padding: 20px;
+    }
+
+    .validation-summary ul {
+        list-style-type: none;
+        color: white;
+        text-align: left;
+        padding: 0;
+    }
+
+    .inner-div {
+        margin: 0 auto;
+        width: 500px;
+        height: 500px;
+        color: white;
+        background: rgb(2,0,36);
+        padding: 30px;
+        background: linear-gradient(90deg, rgb(2 0 36 / 25%) 0%, rgba(9,86,121,1) 35%, rgba(0,212,255,1) 100%);
+    }
+</style>
+<div class="main-wrapper">
+    <div class="inner-div">
+        <div class="validation-summary"> @Html.ValidationSummary(false)</div>
+        <form action="/carts/ConfirmOrderAndPayNow/@(userId)" method="post">
+            <h4>Enter your card details</h4>
+            <div class="form-row">
+
+                <label for="Amount">Amount</label>
+                <input type="number" value="@Model.Amount" class="form-control" readonly id="Amount" name="Amount" placeholder="Amount">
+
+            </div>
+            <div class="form-row">
+                <label for="CardNumber">Your Debit Card Number</label>
+                <input type="number" class="form-control" id="CardNumber" name="CardNumber" placeholder="CardNumber">
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="ExpiryMonth">Expiry Month</label>
+                    <input type="text" class="form-control" id="ExpiryMonth" name="ExpiryMonth" placeholder="ExpiryMonth">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="ExpiryYear">Expiry Year</label>
+                    <input type="text" class="form-control" id="ExpiryYear" name="ExpiryYear" placeholder="ExpiryYear">
+                </div>
+            </div>
+            <div class="form-row">
+                <label for="CVV">CVV</label>
+                <input type="number" class="form-control" id="CVV" name="CVV" placeholder="CVV">
+            </div>
+            @Html.HiddenFor(x => x.CardId)
+            @Html.HiddenFor(x => x.UserProfileId)
+
+            <hr />
+            <button type="submit" class="btn btn-primary text-center">Confirm</button>
+            <button onclick="goBack()" class="btn btn-default text-center">Go Back</button>
+
+            <script>function goBack() {
+                    window.history.back();
+                }</script>
+        </form>
+    </div>
+</div> 

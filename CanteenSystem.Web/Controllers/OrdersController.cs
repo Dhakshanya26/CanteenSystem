@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using CanteenSystem.Dto.Models;
-using CanteenSystem.Dal;
+using CanteenSystem.Web.Models;
+using CanteenSystem.Web.ViewModel;
 
 namespace CanteenSystem.Web.Controllers
 {
@@ -19,11 +19,27 @@ namespace CanteenSystem.Web.Controllers
             _context = context;
         }
 
+        public async Task<IActionResult> OrderConfirmation(string notificationMessage)
+        { 
+            return View(new OrderConfirmationModel(notificationMessage));
+        }
+
         // GET: Orders
         public async Task<IActionResult> Index()
         {
-            var canteenSystemDbContext = _context.Orders.Include(o => o.UserProfile);
+            var canteenSystemDbContext = _context.Orders.Include(o => o.UserProfile)
+                .Include(o => o.Payments);
             return View(await canteenSystemDbContext.ToListAsync());
+        }
+
+       [Route("orders/studentorder/{userId}")]
+        public async Task<IActionResult> StudentOrder(int userId)
+        {
+            var canteenSystemDbContext = _context.Orders.Where(x => x.UserProfileId == userId)
+                .Include(o => o.UserProfile).Include(o => o.Payments);
+               
+            var orders = await canteenSystemDbContext.ToListAsync();
+            return View(orders);
         }
 
         // GET: Orders/Details/5
