@@ -25,7 +25,7 @@
     }
 </style>
 <div class="login-wrapper">
-    @if (Model.Message != null)
+    @if (Model != null && Model.Message != null)
     {
     <div class="text-center"> 
         <div class="alert alert-success" role="alert">
