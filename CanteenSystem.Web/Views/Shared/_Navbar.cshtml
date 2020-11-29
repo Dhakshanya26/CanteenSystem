@@ -96,16 +96,12 @@
             </li>
             <li class="nav-item">
                 <form class="form-inline" asp-controller="Login" asp-action="Logout">
-                    <button type="submit" class="nav-link btn btn-link text-info">Logout</button>
+                    <a type="submit" class="nav-link text-dark">Logout</a>
                 </form>
             </li>
         }
         else
-        {
-            <li class="nav-item">
-                <a class="nav-link text-dark" asp-controller="Login"
-                   asp-action="Index">Login</a>
-            </li>
+        { 
             <li class="nav-item">
                 <a class="nav-link text-dark" asp-controller="Login"
                    asp-action="Register">Register</a>

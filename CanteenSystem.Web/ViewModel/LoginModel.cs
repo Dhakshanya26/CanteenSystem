@@ -13,5 +13,12 @@ namespace CanteenSystem.Web.ViewModel
 
         [Required(ErrorMessage = "Password is required")]
         public string Password { get; set; }
+
+        public string Message { get; set; }
+
+        public LoginModel()
+        {
+
+        }
     }
 }
