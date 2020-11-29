@@ -91,8 +91,46 @@ namespace CanteenSystem.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> AddStudentFund(CardModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
             if (model.CardId != 0)
             {
+                var isInvalid = false;
+                if (model.BankCardNumber != 42424242)
+                {
+                    isInvalid = true;
+                    ModelState.AddModelError("error", "Enter a valid card number. example test data:42424242 "); 
+                   
+                }
+                if (!(model.ExpiryMonth >= 01 && model.ExpiryMonth <= 12))
+                {
+                    isInvalid = true;
+                    ModelState.AddModelError("error", "Enter a valid Expiry month. example test data:01 to 12 ");
+
+                }
+                if (!(model.ExpiryYear >= 2020 && model.ExpiryYear <= 2050))
+                {
+                    isInvalid = true;
+                    ModelState.AddModelError("error", "Enter a valid Expiry Year. example test data:2020 to 2050 "); 
+                }
+                if (!(model.CVV >= 100 && model.CVV <= 999))
+                {
+                    isInvalid = true;
+                    ModelState.AddModelError("error", "Enter a valid CVV. example test data:111 ");
+                }
+                if (model.Amount <= 0)
+                {
+                    isInvalid = true;
+                    ModelState.AddModelError("error", "Amount must be greater than 0");
+                }
+
+                if (isInvalid)
+                {
+                    return View("AddStudentFund", model);
+                }
+
                 var card = await _context.Cards
                    .FirstOrDefaultAsync(m => m.Id == model.CardId);
 
@@ -105,7 +143,7 @@ namespace CanteenSystem.Web.Controllers
                 card.AvailableBalance = card.AvailableBalance+ model.Amount;
                 _context.Update(card);
                 _context.SaveChanges();
-                return RedirectToAction("Student", new { id = model.UserProfileId ,message= $"{model.Amount} added to the fund" }); 
+                return RedirectToAction("Student", new { id = model.UserProfileId ,message= $"£{model.Amount} added to the fund" }); 
             }
 
             return View(model);
@@ -113,6 +151,7 @@ namespace CanteenSystem.Web.Controllers
         [Route("AddParentFund/{id}/{userProfileId}")]
         public async Task<IActionResult> AddParentFund(int id, int userProfileId)
         {
+         
             var card = await _context.Cards
                .FirstOrDefaultAsync(m => m.Id == id);
 
@@ -132,8 +171,45 @@ namespace CanteenSystem.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> AddParentFund(CardModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
             if (model.CardId != 0)
             {
+                var isInvalid = false;
+                if (model.BankCardNumber != 42424242)
+                {
+                    isInvalid = true;
+                    ModelState.AddModelError("error", "Enter a valid card number. example test data:42424242 ");
+
+                }
+                if (!(model.ExpiryMonth >= 01 && model.ExpiryMonth <= 12))
+                {
+                    isInvalid = true;
+                    ModelState.AddModelError("error", "Enter a valid Expiry month. example test data:01 to 12 ");
+
+                }
+                if (!(model.ExpiryYear >= 2020 && model.ExpiryYear <= 2050))
+                {
+                    isInvalid = true;
+                    ModelState.AddModelError("error", "Enter a valid Expiry Year. example test data:2020 to 2050 ");
+                }
+                if (!(model.CVV >= 100 && model.CVV <= 999))
+                {
+                    isInvalid = true;
+                    ModelState.AddModelError("error", "Enter a valid CVV. example test data:111 ");
+                }
+                if (model.Amount <= 0)
+                {
+                    isInvalid = true;
+                    ModelState.AddModelError("error", "Amount must be greater than 0");
+                }
+
+                if (isInvalid)
+                {
+                    return View("AddStudentFund", model);
+                }
                 var card = await _context.Cards
                    .FirstOrDefaultAsync(m => m.Id == model.CardId);
 
@@ -147,7 +223,7 @@ namespace CanteenSystem.Web.Controllers
                 _context.Update(card);
                 _context.SaveChanges();
 
-                return RedirectToAction("Parent", new { id = model.UserProfileId, message = $"{model.Amount} added to the fund" });
+                return RedirectToAction("Parent", new { id = model.UserProfileId, message = $"£{model.Amount} added to the fund" });
             }
 
             return View(model);

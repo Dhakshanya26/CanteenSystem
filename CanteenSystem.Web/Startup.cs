@@ -48,8 +48,9 @@ namespace CanteenSystem.Web
             services.AddAuthentication();
             services.ConfigureApplicationCookie(o => o.LoginPath = "/Login");
             services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, CustomClaimsFactory>();
-             
-
+            services.AddScoped<ICardsService, Cardsservice>();
+            services.AddScoped<IDiscountsService, DiscountsService>();
+            services.AddScoped<ICartsService, CartsService>();
             services.Configure<IdentityOptions>(options =>
             {   
                 // Lockout settings.

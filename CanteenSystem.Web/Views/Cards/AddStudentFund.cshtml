@@ -23,44 +23,51 @@
         padding: 30px;
         background: linear-gradient(90deg, rgb(2 0 36 / 25%) 0%, rgba(9,86,121,1) 35%, rgba(0,212,255,1) 100%);
     }
+    .help-block {
+        color: red;
+    }
 </style>
 <div class="main-wrapper">
     <div class="inner-div">
-        <div class="validation-summary"> @Html.ValidationSummary(false)</div>
+        <div class="help-block"> @Html.ValidationSummary(false)</div>
         <form action="/cards/AddStudentFund" method="post">
             <h4>Enter your card details</h4>
             <div class="form-row">
 
                 <label for="Amount">Amount</label>
-                <input type="number" class="form-control" id="Amount" name="Amount" placeholder="Amount">
+                @Html.TextBoxFor(x => x.Amount, new { @class = "form-control" ,@type="number", @Value = "" })
 
             </div>
             <div class="form-row">
                 <label for="CardNumber">Your Debit Card Number</label>
-                <input type="number" class="form-control" id="CardNumber" name="CardNumber" placeholder="CardNumber">
+                @Html.TextBoxFor(x => x.BankCardNumber, new { @class = "form-control", @type = "number", @Value = "" })
+                
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="ExpiryMonth">Expiry Month</label>
-                    <input type="text" class="form-control" id="ExpiryMonth" name="ExpiryMonth" placeholder="ExpiryMonth">
+                    @Html.TextBoxFor(x => x.ExpiryMonth, new { @class = "form-control", @type = "number", @Value = "" })
                 </div>
                 <div class="form-group col-md-6">
                     <label for="ExpiryYear">Expiry Year</label>
-                    <input type="text" class="form-control" id="ExpiryYear" name="ExpiryYear" placeholder="ExpiryYear">
+                    @Html.TextBoxFor(x => x.ExpiryYear, new { @class = "form-control", @type = "number", @Value = "" })
                 </div>
             </div>
             <div class="form-row">
                 <label for="CVV">CVV</label>
-                <input type="number" class="form-control" id="CVV" name="CVV" placeholder="CVV">
+                @Html.TextBoxFor(x => x.CVV, new { @class = "form-control", @type = "number" ,@Value="" })
             </div>
             @Html.HiddenFor(x => x.CardId)
             @Html.HiddenFor(x => x.UserProfileId)
 
             <hr />
-            <button type="submit" class="btn btn-primary text-center">Confirm</button>
-            <button onclick="goBack()" class="btn btn-default text-center">Go Back</button>
+            <div class="text-center">
 
+
+                <button type="submit" class="btn btn-primary text-center">Confirm</button>
+                <button onclick="goBack()" class="btn btn-default text-center">Go Back</button>
+            </div>
             <script>
 function goBack() {
   window.history.back();

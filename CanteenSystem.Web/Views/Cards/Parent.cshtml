@@ -8,6 +8,10 @@
         padding: 20px;
     }
 
+    .help-block {
+        color: green;
+    }
+
     .inner-div {
         margin: 0 auto;
         width: 500px;
@@ -26,7 +30,7 @@
 
         @if (ViewBag.Status != "" && ViewBag.Status != null)
         {
-            <div>@ViewBag.Status</div>
+            <div class="help-block">@ViewBag.Status</div>
         }
         <dl class="row">
             <dt class="col-sm-6">
@@ -43,11 +47,12 @@
                 Available balance
             </dt>
             <dd class="col-sm-6">
-                @Html.DisplayFor(model => model.AvailableBalance)
+                £ @Html.DisplayFor(model => model.AvailableBalance)
             </dd>
         </dl>
-        <br />
-        <br />
-        <a class="btn  btn-primary text-center" href="/AddParentFund/@Model.Id/@Model.UserProfileId">Add fund</a>
-    </div>
+        <br /> 
+    <div class="text-center">
+    <a class="btn  btn-primary text-center" href="/AddParentFund/@Model.Id/@Model.UserProfileId">Add fund</a>
+    <a id="CancelBtn" class="btn btn-default text-center" href="/home">Go to Home</a>
+</div> </div>
 </div> 
