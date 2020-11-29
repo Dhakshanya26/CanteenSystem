@@ -16,7 +16,7 @@ namespace CanteenSystem.Web.Controllers
     {
         private readonly CanteenSystemDbContext Context;
         private readonly IDiscountsService _DiscountsService;
-        public DiscountsController(CanteenSystemDbContext context, DiscountsService DiscountsService)
+        public DiscountsController(CanteenSystemDbContext context, IDiscountsService DiscountsService)
         {
             Context = context;
             _DiscountsService = DiscountsService;
@@ -27,13 +27,7 @@ namespace CanteenSystem.Web.Controllers
         public async Task<IActionResult> Index()
         {
             return View(await Context.Discounts.ToListAsync());
-        }
-
-        private IActionResult View(object p)
-        {
-            throw new NotImplementedException();
-        }
-
+        } 
         // GET: Discounts/Details/5
         public async Task<IActionResult> Details(int? id)
         {
