@@ -1,6 +1,6 @@
 ﻿@model CanteenSystem.Web.ViewModel.MealMenuCollectionModel
 @using Microsoft.AspNetCore.Identity
-@using CanteenSystem.Dto.Models 
+@using CanteenSystem.Dto.Models
 
 @inject SignInManager<ApplicationUser> SignInManager
 @using Microsoft.AspNetCore.Authorization
@@ -16,7 +16,7 @@
 <hr />
 <form class="form-inline">
 
-    <div class="form-group">
+    <div class="form-group" style="padding-left: 20px;">
         <label for="staticEmail" class="col-sm-6 col-form-label">Meal type:</label>
         <div class="col-sm-6">
             @Html.DropDownListFor(m => m.SelectedMealType, new SelectList(Model.AvailableMealTypes.Items, "Value", "Text"),
@@ -24,26 +24,30 @@
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" style="padding-left: 20px;">
         <label for="staticEmail" class="col-sm-6 col-form-label">Availability:</label>
         <div class="col-sm-6">
 
             <div class="input-group date" data-provide="datepicker">
-                <input type="text" name="SelectedAvailableDate" id="SelectedAvailableDate" readonly onchange="form.submit();" class="form-control" autocomplete="off"
+                <input placeholder="filter by date" type="text" name="SelectedAvailableDate" id="SelectedAvailableDate" readonly onchange="form.submit();" class="form-control" autocomplete="off"
                        value="@(Model.SelectedAvailableDate == default ? string.Empty: Model.SelectedAvailableDate.Value.ToString())">
                 <div class="input-group-addon">
                     <span class="glyphicon glyphicon-th"></span>
                 </div>
             </div>
-            <script>
-                $("#datepicker").datepicker("setDate", new Date());
+            <script>$("#datepicker").datepicker("setDate", new Date());
                 $('#datepicker').datepicker({
                     weekStart: 1,
                     daysOfWeekHighlighted: "6,0",
                     autoclose: true,
                     todayHighlight: true,
-                });
-            </script>
+                });</script>
+        </div>
+    </div>
+    <div class="form-group" style="padding-left: 20px;">
+       
+        <div class="col-sm-6">
+            <a id="GetAllRecords" onclick="getAllMeals()" class="btn btn-info" href="#">Get All meals</a>
         </div>
     </div>
 
@@ -77,7 +81,7 @@
         @if (Model.MealMenuModels == null || !Model.MealMenuModels.Any())
         {
             <tr class="no-record-found">
-                <td colspan="4">
+                <td colspan="6">
                     <span> No records found</span>
 
                 </td>
@@ -116,28 +120,32 @@
     </tbody>
 </table>
 
-<script>
 
-    function addToCart(menuId, availabilityDateId, userId, menuName) {
+<div class="text-center">
+    <a id="CancelBtn" class="btn btn-default" href="/home">Back to Home</a>
+</div>
+<script>function addToCart(menuId, availabilityDateId, userId, menuName) {
         $.ajax({
             method: "post",
             url: "/carts/AddToCart/" + menuId + "/" + availabilityDateId + "/" + userId,
-            success: function (result) { 
-                $('#statusMessage').show(); 
+            success: function (result) {
+                $('#statusMessage').show();
                 if (result.status) {
-                  
+
                     $('#statusMessage').addClass("alert-success  w-100");
                     $('#statusMessage').html("<span>" + menuName + " is added to the cart</span>");
                 } else {
                     $('#statusMessage').addClass("alert-danger  w-100");
                     $('#statusMessage').html("<span>" + menuName + " has already been added to the cart</span>");
-                 }
+                }
                 setTimeout(hideStatusMessage, 2000);
             }
         });
     }
 
+    function getAllMeals() {
+        window.location.href = "/mealmenus/StudentMealList";
+    }
     function hideStatusMessage() {
         $('#statusMessage').hide();
-    }
-</script>
+    }</script>

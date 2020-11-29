@@ -17,32 +17,52 @@
         padding: 30px;
         background: linear-gradient(90deg, rgb(2 0 36 / 25%) 0%, rgba(9,86,121,1) 35%, rgba(0,212,255,1) 100%);
     }
-    .validation-summary ul {
+    .help-block ul {
         list-style-type: none;
-        color: white;
+        
         text-align: left;
         padding: 0; 
     }
 </style>
 <div class="login-wrapper">
+    @if (Model.Message != null)
+    {
+    <div class="text-center"> 
+        <div class="alert alert-success" role="alert">
+            @Model.Message
+        </div>
+    </div>
+    }
     <div class="inner-div">
         <h4>Login</h4>
-        <form asp-action="Login" asp-route-returnUrl="@ViewData["ReturnUrl"]">
-            <div class="validation-summary"> @Html.ValidationSummary(true)</div>
+        <form asp-action="Login" asp-route-returnUrl="@ViewData["ReturnUrl"]" onsubmit="submitForm()">
+            <div class="help-block"> @Html.ValidationSummary(true)</div>
 
             <div class="form-group">
                 <div class="form-row">
                     <label for="Firstname">EmailAddress</label>
-                    <input type="text" class="form-control" id="Username" name="Username" placeholder="Username">
+                    <input type="email" class="form-control" id="Username" autocomplete="off" name="Username" placeholder="Username">
+                    @Html.ValidationMessageFor(model => model.Username, String.Empty,
+           new { @class = "help-block" })
                 </div>
                 <div class="form-row">
                     <label for="Lastname">Password</label>
-                    <input type="text" class="form-control" id="Password" name="Password" placeholder="Password">
+                    <input type="password" class="form-control" id="Password" autocomplete="off" name="Password" placeholder="Password">
+                    @Html.ValidationMessageFor(model => model.Password, String.Empty,
+           new { @class = "help-block" })
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary" style="margin-top: 40px;">Sign in</button>
+            <button type="submit" id="LoginBtn" class="btn btn-primary" style="margin-top: 40px;">Sign in</button>
         </form>
     </div>
 </div>
 
+
+<script>
+    function submitForm() {
+
+        document.getElementById("RegisterBtn").disabled = true;
+        return true;
+    }
+</script>

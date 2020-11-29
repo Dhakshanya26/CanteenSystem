@@ -35,12 +35,26 @@
 
     <style>
         .content-wrapper {
-            min-height: 650px;
+            min-height: 450px;
+            background-color: #d0e2ea;
         }
-
+        .main-header .navbar-nav .nav-item a:hover {
+             text-decoration:underline;
+             font-size:18px;
+        }
+        .navbar {
+            position: relative;
+            min-height: 44px;
+            padding-bottom: 20px;
+            border: 1px solid transparent;
+            background-color: #00cdf7;
+            border-radius: 0px !important;
+        }
         .main-footer {
-            position: fixed;
             left: 0;
+            clear: both;
+            position: relative;
+            position: absolute;
             bottom: 0;
             width: 100%;
         }
@@ -69,6 +83,10 @@
             text-align: center;
             color: white;
         }
+        .help-block {
+            background-color: #fbfbfbbf;
+            color: red;
+        }
     </style>
 </head>
 <body>
@@ -79,7 +97,7 @@
     <div class="content-wrapper"> 
             <!-- Main content -->
             <section class="content">
-                <div class="container">
+                <div class="container" style="height: auto; padding-bottom: 70px;">
                     @RenderBody()
                 </div><!-- /.container-fluid -->
             </section>

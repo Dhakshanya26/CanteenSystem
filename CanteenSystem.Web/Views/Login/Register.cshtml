@@ -10,18 +10,15 @@
     .register-wrapper {
         padding: 5px;
     }
-
-    .validation-summary ul {
-        list-style-type: none;
-        color: white;
-        text-align: left;
-        padding: 0;
+    .help-block {
+        color:red;
     }
+    
 
     .inner-div {
         margin: 0 auto;
         width: 500px;
-        height: 600px;
+        height: auto;
         color: white;
         background: rgb(2,0,36);
         padding: 30px;
@@ -30,53 +27,86 @@
 </style>
 <div class="register-wrapper">
     <div class="inner-div">
-        <div class="validation-summary"> @Html.ValidationSummary(false)</div>
-        <form action="@(postUrl)" method="post">
+        <div class="help-block"> @Html.ValidationSummary(false)</div>
+        <form action="@(postUrl)" method="post" onsubmit="submitForm()">
             <h4>Register your details</h4>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="Firstname">Firstname</label>
-                    <input type="text" class="form-control" id="Firstname" name="Firstname" placeholder="Firstname">
+                    @Html.TextBoxFor(x => x.Firstname, new { @class = "form-control", @type = "text"  , @autocomplete = "off" })
+
                 </div>
                 <div class="form-group col-md-6">
                     <label for="Lastname">Lastname</label>
-                    <input type="text" class="form-control" id="Lastname" name="Lastname" placeholder="Lastname">
+                    @Html.TextBoxFor(x => x.Lastname, new { @class = "form-control", @type = "text", @autocomplete = "off" })
+
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="Email">Email</label>
-                    <input type="email" class="form-control" id="Email" name="Email" placeholder="Email">
+                    @Html.TextBoxFor(x => x.Email, new { @class = "form-control", @type = "email", @autocomplete = "off" })
+
                 </div>
                 <div class="form-group col-md-6">
                     <label for="Password">Password</label>
-                    <input type="password" class="form-control" id="Password" name="Password" placeholder="Password">
-                </div>
-            </div>
+                    @Html.TextBoxFor(x => x.Password, new { @class = "form-control", @type = "password", @autocomplete = "off" })
 
-            <div class="form-group">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="IsParent" id="IsParent" onclick="toggle_validator();">
-                    <label class="form-check-label" for="IsParent" value="false">
-                        Is Parent
-                    </label>
                 </div>
             </div>
 
 
-            <div class="form-group" id="DepartmentDiv" style="display:block">
-                <label for="Department">Department</label>
-                <input type="text" class="form-control" id="Department" name="Department" placeholder="Department">
-            </div>
-            <div class="form-group" id="RollnumberDiv" style="display:block">
-                <label for="Rollnumber">Rollnumber</label>
-                <input type="number" class="form-control" id="Rollnumber" name="Rollnumber" placeholder="Rollnumber">
-            </div>
-            <div class="form-group" id="StudentEmailDiv" style="display:none">
-                <label for="Rollnumber">Student Email</label>
-                <input type="email" class="form-control" id="StudentEmail" name="StudentEmail" placeholder="Student Email">
-            </div>
-            <button type="submit" class="btn btn-primary">Register</button>
+            @if (!Model.IsAdmin)
+            {
+
+                <div class="form-group">
+                    <div class="form-check">
+                        @if (Model.IsParent)
+                        {
+                            @Html.TextBoxFor(x => x.IsParent, new
+                       {
+                           @class = "form-check-input",
+                           @type = "checkbox",
+                           @onclick = "toggle_validator();",
+                           @checked = Model.IsParent
+                       })
+                        }
+                        else
+                        {
+                            @Html.TextBoxFor(x => x.IsParent, new
+                                                   {
+                                                       @class = "form-check-input",
+                                                       @type = "checkbox",
+                                                       @onclick = "toggle_validator();",
+
+                            })
+                        }
+                        <label class="form-check-label" for="IsParent" value="false">
+                            Is Parent
+                        </label>
+                    </div>
+                </div>
+                if (!Model.IsParent)
+                {
+                    <div class="form-group" id="DepartmentDiv" style=@(Model.IsParent? "display:none": "display:block")>
+                        <label for="Department">Department</label>
+                        @Html.TextBoxFor(x => x.Department, new { @class = "form-control", @type = "text", @autocomplete = "off" })
+
+                    </div>
+                    <div class="form-group" id="RollnumberDiv" style=@(Model.IsParent? "display:none": "display:block")>
+                        <label for="Rollnumber">Rollnumber</label>
+                        @Html.TextBoxFor(x => x.Rollnumber, new { @class = "form-control", @type = "number", Value = "", @autocomplete = "off" })
+                    </div>
+                }
+                <div class="form-group" id="StudentEmailDiv" style=@(Model.IsParent? "display:block": "display:none")>
+                    <label for="Rollnumber">Student Email</label>
+                    @Html.TextBoxFor(x => x.StudentEmail, new { @class = "form-control", @type = "email", @autocomplete = "off" })
+
+                </div>
+            }
+            @Html.HiddenFor(x => x.IsAdmin)
+            <button type="submit" id="RegisterBtn" class="btn btn-primary">Register</button>
+            <a  id="CancelBtn" class="btn btn-default" href="javascript:history.back()">Cancel</a> 
         </form>
     </div>
 
@@ -84,12 +114,16 @@
 
 
 <script>
-
     var Rollnumber = document.getElementById("RollnumberDiv");
     var Department = document.getElementById("DepartmentDiv");
     var StudentEmail = document.getElementById("StudentEmailDiv");
+    function submitForm() {
+        
+        document.getElementById("RegisterBtn").disabled = true;
+        return true;
+    }
     function toggle_validator(e) {
-       
+
         if (document.getElementById('IsParent').checked) {
             $('#IsParent').val(true);
             Rollnumber.style.display = "none";
