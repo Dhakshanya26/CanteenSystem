@@ -19,7 +19,7 @@ namespace CanteenSystem.Dto.Models
         public int MealTypeId { get; set; }
         public double Price { get; set; }
         public int? DiscountId { get; set; }
-
+        public string ImageName { get; set; }
         public virtual Discount Discount { get; set; }
         public virtual MealType MealType { get; set; }
         public virtual ICollection<Cart> Carts { get; set; }

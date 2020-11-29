@@ -62,7 +62,7 @@ namespace CanteenSystem.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,MealName,MealTypeId,Price,DiscountId")] MealMenu mealMenu)
+        public async Task<IActionResult> Create([Bind("Id,MealName,MealTypeId,Price,DiscountId,ImageName")] MealMenu mealMenu)
         {
             if (ModelState.IsValid)
             {
@@ -98,7 +98,7 @@ namespace CanteenSystem.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,MealName,MealTypeId,Price,DiscountId")] MealMenu mealMenu)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,MealName,MealTypeId,Price,DiscountId,ImageName")] MealMenu mealMenu)
         {
             if (id != mealMenu.Id)
             {
@@ -208,7 +208,8 @@ namespace CanteenSystem.Web.Controllers
                     Price = price,
                     DiscountName = x.MealMenu.Discount?.Name,
                     WasPrice = wasPrice,
-                    AvailabililtyDateId = x.Id
+                    AvailabililtyDateId = x.Id,
+                    ImageName = x.MealMenu.ImageName
                 };
             }).ToList();
             mealMenuList = model == null || !model.SelectedAvailableDate.HasValue ?

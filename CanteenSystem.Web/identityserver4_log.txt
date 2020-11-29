@@ -4531,3 +4531,28 @@ System.NullReferenceException: Object reference not set to an instance of an obj
 2020-11-29 22:37:38.381 +00:00 [INF] Starting host...
 2020-11-29 22:37:40.993 +00:00 [WRN] 'AddEntityFramework*' was called on the service provider, but 'UseInternalServiceProvider' wasn't called in the DbContext options configuration. Consider removing the 'AddEntityFramework*' call, as in most cases it's not needed and may cause conflicts with other products and services registered in the same service provider.
 2020-11-29 22:37:43.242 +00:00 [WRN] No type was specified for the decimal property 'AvailableBalance' on entity type 'Card'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+2020-11-29 22:52:34.728 +00:00 [INF] Starting host...
+2020-11-29 22:52:40.988 +00:00 [WRN] 'AddEntityFramework*' was called on the service provider, but 'UseInternalServiceProvider' wasn't called in the DbContext options configuration. Consider removing the 'AddEntityFramework*' call, as in most cases it's not needed and may cause conflicts with other products and services registered in the same service provider.
+2020-11-29 22:52:42.991 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-29 22:54:38.245 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-29 22:54:44.019 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-29 22:54:47.135 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-29 22:54:47.927 +00:00 [WRN] No type was specified for the decimal property 'AvailableBalance' on entity type 'Card'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+2020-11-29 22:54:50.127 +00:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2020-11-29 22:55:44.785 +00:00 [INF] AuthenticationScheme: Identity.Application signed out.
+2020-11-29 22:55:44.787 +00:00 [INF] AuthenticationScheme: Identity.External signed out.
+2020-11-29 22:55:44.788 +00:00 [INF] AuthenticationScheme: Identity.TwoFactorUserId signed out.
+2020-11-29 22:55:48.989 +00:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2020-11-29 22:57:31.690 +00:00 [INF] AuthenticationScheme: Identity.Application signed out.
+2020-11-29 22:57:31.692 +00:00 [INF] AuthenticationScheme: Identity.External signed out.
+2020-11-29 22:57:31.692 +00:00 [INF] AuthenticationScheme: Identity.TwoFactorUserId signed out.
+2020-11-29 22:57:40.661 +00:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2020-11-29 22:58:37.400 +00:00 [INF] Starting host...
+2020-11-29 22:58:40.110 +00:00 [WRN] 'AddEntityFramework*' was called on the service provider, but 'UseInternalServiceProvider' wasn't called in the DbContext options configuration. Consider removing the 'AddEntityFramework*' call, as in most cases it's not needed and may cause conflicts with other products and services registered in the same service provider.
+2020-11-29 22:58:53.168 +00:00 [WRN] No type was specified for the decimal property 'AvailableBalance' on entity type 'Card'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+2020-11-29 22:58:59.962 +00:00 [INF] AuthenticationScheme: Identity.Application signed out.
+2020-11-29 22:58:59.964 +00:00 [INF] AuthenticationScheme: Identity.External signed out.
+2020-11-29 22:58:59.964 +00:00 [INF] AuthenticationScheme: Identity.TwoFactorUserId signed out.
+2020-11-29 22:59:04.993 +00:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2020-11-29 23:01:27.385 +00:00 [INF] Starting host...
+2020-11-29 23:01:30.391 +00:00 [WRN] 'AddEntityFramework*' was called on the service provider, but 'UseInternalServiceProvider' wasn't called in the DbContext options configuration. Consider removing the 'AddEntityFramework*' call, as in most cases it's not needed and may cause conflicts with other products and services registered in the same service provider.

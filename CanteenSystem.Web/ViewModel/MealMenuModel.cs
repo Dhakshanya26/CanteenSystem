@@ -10,6 +10,7 @@ namespace CanteenSystem.Web.ViewModel
     public class MealMenuModel
     {
         public string Name { get; set; }
+        public string ImageName { get; set; }
         public int Id { get;set; } 
         public decimal? WasPrice { get; set; }
         public decimal Price { get; set; }

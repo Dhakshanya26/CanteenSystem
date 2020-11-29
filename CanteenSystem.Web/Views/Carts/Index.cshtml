@@ -34,14 +34,15 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.MealAvailableDate)
-            </th> 
+            </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
         @if (Model == null || !Model.Any())
         {
             <tr class="no-record-found">
-                <td colspan="5">
+                <td colspan="6">
                     <span> No records found</span>
 
                 </td>

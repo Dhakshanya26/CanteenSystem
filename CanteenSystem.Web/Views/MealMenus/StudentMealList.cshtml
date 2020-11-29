@@ -12,6 +12,11 @@
     var userClaimId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.UserData);
     var userId = userClaimId == null ? 0 : Convert.ToInt32(userClaimId.Value);
 }
+<style>
+    .td {
+        vertical-align: middle;
+    }
+</style>
 <h1>Available meal menu</h1>
 <hr />
 <form class="form-inline">
@@ -60,6 +65,9 @@
     <thead>
         <tr>
             <th>
+                Image
+            </th>
+            <th>
                 Name
             </th>
             <th>
@@ -74,6 +82,7 @@
             <th>
                 MealType
             </th>
+
             <th></th>
         </tr>
     </thead>
@@ -91,30 +100,40 @@
         {
             foreach (var item in Model.MealMenuModels)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @(item.DiscountName != null ? item.DiscountName: "N/A")
-                    </td>
-                    <td>
-                        @if (item.WasPrice != default)
-                        {
-                            <span style=" text-decoration: line-through;"> £ @item.WasPrice</span>
-                        }
-                        <span> £@item.Price</span>
-                    </td>
-                    <td>
-                        @item.AvailableDate.Date.ToString("dd/MM/yyyy")
-                    </td>
-                    <td>
-                        @item.MealType
-                    </td>
-                    <td>
-                        <a onclick="addToCart(@(item.Id),@(item.AvailabililtyDateId),@(userId),'@(item.Name)')" href="#">Add to Card</a>
-                    </td>
-                </tr>
+    <tr>
+        <td>
+            @if (string.IsNullOrEmpty(item.ImageName))
+            {
+                <img src="/images/no-image.png" alt="Image name" height="100px" width="100px" />
+            }
+            else
+            {
+                <img src="/images/@item.ImageName" alt="Image name" height="100px" width="100px" />
+            }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @(item.DiscountName != null ? item.DiscountName: "N/A")
+        </td>
+        <td>
+            @if (item.WasPrice != default)
+            {
+                <span style=" text-decoration: line-through;"> £ @item.WasPrice</span>
+            }
+            <span> £@item.Price</span>
+        </td>
+        <td>
+            @item.AvailableDate.Date.ToString("dd/MM/yyyy")
+        </td>
+        <td>
+            @item.MealType
+        </td>
+        <td>
+            <a onclick="addToCart(@(item.Id),@(item.AvailabililtyDateId),@(userId),'@(item.Name)')" href="#">Add to Card</a>
+        </td>
+    </tr>
             }
         }
     </tbody>
