@@ -133,7 +133,7 @@ namespace CanteenSystem.Web.Controllers
                         x.AvailabilityDate == cart.MealAvailableDate).FirstOrDefault();
                     if (mealMenuAvailabilities != null)
                     {
-                        if (mealMenuAvailabilities.Quantity > 1 && mealMenuAvailabilities.Quantity >= cart.Quantity + selectedQuantity)
+                        if (mealMenuAvailabilities.Quantity >= 1 && mealMenuAvailabilities.Quantity >= selectedQuantity)
                         {
                             cart.Quantity = selectedQuantity;
                             _context.Update(cart);
@@ -162,7 +162,8 @@ namespace CanteenSystem.Web.Controllers
                 Random generator = new Random();
                 int r = generator.Next(1000, 10000000);
                 var orderReferenceNumber = $"ORDER{r}";
-                var cartItems = await _context.Carts.Where(x=>x.UserProfileId == userId).ToListAsync();
+                var cartItems = await _context.Carts.Where(x=>x.UserProfileId == userId)
+                            .ToListAsync();
                 if (cartItems != null)
                 {
                   
@@ -192,6 +193,18 @@ namespace CanteenSystem.Web.Controllers
                     _context.Add(order);
                     _context.SaveChanges();
 
+                    // Update meal menu quantity
+                    foreach (var item in cartItems)
+                    {
+                        var mealMenuAvailability = _context.MealMenuAvailabilities
+                            .FirstOrDefault(x => x.MealMenuId == item.MealMenuId && x.AvailabilityDate == item.MealAvailableDate);
+                         if(mealMenuAvailability != null)
+                        { 
+                            mealMenuAvailability.Quantity = mealMenuAvailability.Quantity - item.Quantity;
+                            _context.Update(mealMenuAvailability);
+                            await _context.SaveChangesAsync();
+                        }
+                    }
                     var cartToBeRemoved = await _context.Carts.Where(c=>c.UserProfileId == userId).ToListAsync();
                     _context.Carts.RemoveRange(cartToBeRemoved);
                     await _context.SaveChangesAsync();
@@ -332,6 +345,19 @@ namespace CanteenSystem.Web.Controllers
                     var cartToBeRemoved = _context.Carts.Where(c => c.UserProfileId == model.UserProfileId);
                     _context.Carts.RemoveRange(cartToBeRemoved);
                     await _context.SaveChangesAsync();
+
+                    // Update meal menu quantity
+                    foreach (var item in cartItems)
+                    {
+                        var mealMenuAvailability = _context.MealMenuAvailabilities
+                            .FirstOrDefault(x => x.MealMenuId == item.MealMenuId && x.AvailabilityDate == item.MealAvailableDate);
+                        if (mealMenuAvailability != null)
+                        {
+                            mealMenuAvailability.Quantity = mealMenuAvailability.Quantity - item.Quantity;
+                            _context.Update(mealMenuAvailability);
+                            await _context.SaveChangesAsync();
+                        }
+                    }
 
                     var userProfiles = await _context.UserProfiles.Where(x => x.Id == model.UserProfileId).ToListAsync();
                     if (userProfiles != null)
