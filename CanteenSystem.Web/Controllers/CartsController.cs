@@ -217,20 +217,58 @@ namespace CanteenSystem.Web.Controllers
 
                 });
             }
-                return View("confirmOrderAndPayNow",new CardModel { Amount=  totalPrice});
+                return View("confirmOrderAndPayNow",new CardModel { Amount=  totalPrice,UserProfileId = userId });
         }
 
 
-        [Route("Carts/confirmOrderAndPayNow/{userId}")]
+        [Route("Carts/confirmOrderAndPayNow")]
         [HttpPost]
-        public async Task<IActionResult> ConfirmOrderAndPayNow(int userId)
+        public async Task<IActionResult> ConfirmOrderAndPayNow(CardModel model)
         {
             try
+            { 
+            if (!ModelState.IsValid)
             {
+                return View(model);
+            } 
+                var isInvalid = false;
+                if (model.BankCardNumber != 42424242)
+                {
+                    isInvalid = true;
+                    ModelState.AddModelError("error", "Enter a valid card number. example test data:42424242 ");
+
+                }
+                if (!(model.ExpiryMonth >= 01 && model.ExpiryMonth <= 12))
+                {
+                    isInvalid = true;
+                    ModelState.AddModelError("error", "Enter a valid Expiry month. example test data:01 to 12 ");
+
+                }
+                if (!(model.ExpiryYear >= 2020 && model.ExpiryYear <= 2050))
+                {
+                    isInvalid = true;
+                    ModelState.AddModelError("error", "Enter a valid Expiry Year. example test data:2020 to 2050 ");
+                }
+                if (!(model.CVV >= 100 && model.CVV <= 999))
+                {
+                    isInvalid = true;
+                    ModelState.AddModelError("error", "Enter a valid CVV. example test data:111 ");
+                }
+                if (model.Amount <= 0)
+                {
+                    isInvalid = true;
+                    ModelState.AddModelError("error", "Amount must be greater than 0");
+                }
+
+                if (isInvalid)
+                {
+                    return View("AddStudentFund", model);
+                }
+
                 Random generator = new Random();
                 int r = generator.Next(1000, 10000000);
                 var orderReferenceNumber = $"ORDER{r}";
-                var cartItems = await _context.Carts.Where(x => x.UserProfileId == userId).ToListAsync();
+                var cartItems = await _context.Carts.Where(x => x.UserProfileId == model.UserProfileId).ToListAsync();
                 if (cartItems != null)
                 {
 
@@ -254,7 +292,7 @@ namespace CanteenSystem.Web.Controllers
                         UpdatedDate = DateTime.Now,
                         OrderReference = orderReferenceNumber,
                         TotalPrice = (double)totalPrice,
-                        UserProfileId = userId,
+                        UserProfileId = model.UserProfileId,
                         OrderItems = orderItems
                     };
                     
@@ -272,11 +310,11 @@ namespace CanteenSystem.Web.Controllers
                     };
                     _context.Add(payment);
                     _context.SaveChanges();
-                    var cartToBeRemoved = _context.Carts.Where(c => c.UserProfileId == userId);
+                    var cartToBeRemoved = _context.Carts.Where(c => c.UserProfileId == model.UserProfileId);
                     _context.Carts.RemoveRange(cartToBeRemoved);
                     await _context.SaveChangesAsync();
 
-                    var userProfiles = await _context.UserProfiles.Where(x => x.Id == userId).ToListAsync();
+                    var userProfiles = await _context.UserProfiles.Where(x => x.Id == model.UserProfileId).ToListAsync();
                     if (userProfiles != null)
                     {
                         var user = userProfiles.FirstOrDefault();
@@ -286,9 +324,7 @@ namespace CanteenSystem.Web.Controllers
                           SendEmail(user.EmailAddress,user.Name,"CanteenReservation system - Order has been placed successfully",body);
                         }
                     } 
-                }
-
-
+                } 
 
                 return RedirectToAction("OrderConfirmation", "Orders",
                     new OrderConfirmationModel($"Your order has been confirmed and the reference number is {orderReferenceNumber}. " +
@@ -298,6 +334,7 @@ namespace CanteenSystem.Web.Controllers
             {
                 return Json(new { Status = false, Message = "Unexpected error occurred, please try again later." });
             }
+            return Json(new { Status = false, Message = "Unexpected error occurred, please try again later." });
         }
         // GET: Carts/Details/5
         public async Task<IActionResult> Details(int? id)

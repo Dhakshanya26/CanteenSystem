@@ -8,6 +8,10 @@
     .main-wrapper {
         padding: 20px;
     }
+    .help-block {
+
+        color:red;
+    }
     .validation-summary ul {
         list-style-type: none;
         color: white;
@@ -21,13 +25,13 @@
        
         color: white;
         background: rgb(2,0,36);
-        padding: 30px;
+        padding: 15px;
         background: linear-gradient(90deg, rgb(2 0 36 / 25%) 0%, rgba(9,86,121,1) 35%, rgba(0,212,255,1) 100%);
     }
 </style>
 <div class="main-wrapper">
     <div class="inner-div">
-        <div class="validation-summary"> @Html.ValidationSummary(false)</div>
+        <div class="help-block"> @Html.ValidationSummary(false)</div>
         <form action="/cards/AddParentFund" method="post">
             <h4>Enter your card details</h4>
             <div class="form-row">
@@ -63,8 +67,7 @@
             <div class="text-center">
 
 
-                <button type="submit" class="btn btn-primary text-center">Confirm</button>
-                <button onclick="goBack()" class="btn btn-default text-center">Go Back</button>
+                <button type="submit" class="btn btn-primary text-center">Confirm</button> 
             </div>
 
             <script>function goBack() {
