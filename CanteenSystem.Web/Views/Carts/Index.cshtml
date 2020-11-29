@@ -11,9 +11,11 @@
     ViewData["Title"] = "Cart";
     var userClaimId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.UserData);
     var userId = userClaimId == null ? 0 : Convert.ToInt32(userClaimId.Value);
+    var totalPrice = Model.Sum(c => c.Quantity * c.Price);
 }
 
 <h1>Your Cart</h1>
+<h3>Total price - £@(totalPrice)</h3>
 <div class="alert " style="display:none" id="statusMessage"> </div>
 <table class="table">
     <thead>
@@ -27,7 +29,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Price)
             </th>
-
+            <th>
+               Total price
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.MealAvailableDate)
             </th>
@@ -50,32 +54,36 @@
 
             foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.MealMenu.MealName)
-                    </td>
-                    <td>
-                        @Html.DropDownListFor(modelItem => item.Quantity, new SelectList(new List<SelectListItem> {
-                       new SelectListItem("1","1"),
-                       new SelectListItem("2","2"),
-                       new SelectListItem("3","3"),
-                       new SelectListItem("4","4")
-                }, "Text", "Value"), new
-                        {
-                            onchange = @"updateQuantity(this.value" + "," + (item.Id) + ",'" + (item.MealMenu.MealName) + "')"
-                        })
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Price)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.MealAvailableDate)
-                    </td>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MealMenu.MealName)
+        </td>
+        <td>
+            @Html.DropDownListFor(modelItem => item.Quantity, new SelectList(new List<SelectListItem> {
+           new SelectListItem("1","1"),
+           new SelectListItem("2","2"),
+           new SelectListItem("3","3"),
+           new SelectListItem("4","4")
+    }, "Text", "Value"), new
+            {
+                onchange = @"updateQuantity(this.value" + "," + (item.Id) + ",'" + (item.MealMenu.MealName) + "')"
+            })
+        </td>
+        <td>
+            £@Html.DisplayFor(modelItem => item.Price)
+        </td>
 
-                    <td>
-                        <a onclick="removeFromCart(@(item.Id),'@(item.MealMenu.MealName)')" href="#">Remove</a>
-                    </td>
-                </tr>
+        <td>
+             £@(item.Price * item.Quantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MealAvailableDate)
+        </td>
+
+        <td>
+            <a onclick="removeFromCart(@(item.Id),'@(item.MealMenu.MealName)')" href="#">Remove</a>
+        </td>
+    </tr>
             }
         }
     </tbody>
@@ -111,6 +119,7 @@ else
                     $('#statusMessage').html("<span> Unexpected error occurred. please try again later</span>");
                 }
                 setTimeout(hideStatusMessage, 2000);
+                location.reload();
             }
         });
     }
@@ -130,6 +139,7 @@ else
                     $('#statusMessage').html("<span> Unexpected error occurred. please try again later</span>");
                 }
                 setTimeout(hideStatusMessage, 2000);
+                location.reload();
             }
         });
     }

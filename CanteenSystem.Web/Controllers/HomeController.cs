@@ -12,6 +12,9 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using CanteenSystem.Dto.Models;
 using CanteenSystem.Dal;
+using CanteenSystem.Web.ViewModel;
+using System.Security.Claims;
+using IdentityModel;
 
 namespace CanteenSystem.Web.Controllers
 {
@@ -33,7 +36,42 @@ namespace CanteenSystem.Web.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var signedUserId=User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.UserData);
+            var homeModel = new HomeModel();
+            if (signedUserId != null)
+            {
+                if (User.Claims.Any(c => c.Type == JwtClaimTypes.Role && c.Value == "Parents"))
+                {
+                    var parentDetail =  _context.ParentMapping
+                          .Include(c => c.StudentUserProfile)
+                          .FirstOrDefault(m => m.ParentId.ToString() == signedUserId.Value);
+
+                    if (parentDetail == null)
+                    {
+                        return NotFound();
+                    }
+
+                    var card =  _context.Cards
+                        .Include(c => c.UserProfile)
+                        .FirstOrDefault(m => m.UserProfileId == parentDetail.StudentId);
+                    if (card != null)
+                    {
+                        homeModel.AvailableBalance = card.AvailableBalance;
+                    }
+                }
+                else if(User.Claims.Any(c => c.Type == JwtClaimTypes.Role && c.Value == "Student"))
+                {
+                    var userCardDetail = _context.Cards.Where(x => x.UserProfileId.ToString() == signedUserId.Value).FirstOrDefault();
+                    if (userCardDetail != null)
+                    {
+                        homeModel.AvailableBalance = userCardDetail.AvailableBalance;
+                    }
+                }
+                
+            }
+
+            
+            return View(homeModel);
         }
 
         public IActionResult Privacy()

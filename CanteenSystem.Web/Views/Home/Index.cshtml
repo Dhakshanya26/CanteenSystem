@@ -5,7 +5,7 @@
 @using System.Security.Claims;
 @inject IAuthorizationService AuthorizationService
 @inject UserManager<ApplicationUser> UserManager
-
+@model CanteenSystem.Web.ViewModel.HomeModel
 @using IdentityModel;
 @{
     ViewData["Title"] = "Home Page";
@@ -31,175 +31,186 @@
     }
 </style>
 <div class="text-center home-wrapper">
-    <h1 class="display-4">Welcome to Canteen Reservation System</h1>
-    <!-- Small boxes (Stat box) -->
-    @if (SignInManager.IsSignedIn(User))
-    {
-<div class="row">
-
     @if (SignInManager.IsSignedIn(User) && User.Claims.Any(c => c.Type == JwtClaimTypes.Role && c.Value == "Student"))
     {
-        <!-- ./col -->
-        <div class="col-lg-6 col-6">
-            <!-- small box -->
-            <div class="small-box bg-gradient-cyan" style="margin: 10px 60px">
-                <div class="inner" style="height:150px">
-                    <h3>Meals</h3>
-
-                    <p>View all meals</p>
-                </div>
-                <div class="icon">
-                    <i class="ion ion-pie-graph"></i>
-                </div>
-                <a href="/mealmenus/studentMeallist" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-        </div>
-
-        <div class="col-lg-6 col-6">
-            <!-- small box -->
-            <div class="small-box bg-gradient-green" style="margin: 10px 60px">
-                <div class="inner" style="height:150px">
-                    <h3>Orders</h3>
-
-                    <p>View your Orders</p>
-                </div>
-                <div class="icon">
-                    <i class="ion ion-bag"></i>
-                </div>
-                <a href="/orders/studentorder/@(userId)" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-        </div>
-        <!-- ./col -->
-
-        <div class="col-lg-6 col-6">
-            <!-- small box -->
-            <div class="small-box bg-gradient-teal" style="margin: 10px 60px">
-                <div class="inner" style="height:150px">
-                    <h3> Balance</h3>
-
-                    <p>View your Fund details</p>
-                </div>
-                <div class="icon">
-                    <i class="ion ion-stats-bars"></i>
-                </div>
-                <a href="/cards/student/@(userId)" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-        </div>
-
-        <!-- ./col -->
-        <div class="col-lg-6 col-6">
-            <!-- small box -->
-            <div class="small-box bg-gradient-warning" style="margin: 10px 60px">
-                <div class="inner" style="height:150px">
-                    <h3>Profile</h3>
-
-                    <p>View your Personal Information</p>
-                </div>
-                <div class="icon">
-                    <i class="ion ion-person-add"></i>
-                </div>
-                <a href="/ShowUserProfile/@(userId)" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-        </div>
-
-
+        <h1 class="display-4">Your available balance: £@(Model.AvailableBalance)</h1>
     }
-    else if (SignInManager.IsSignedIn(User) && User.Claims.Any(c => c.Type == JwtClaimTypes.Role && c.Value == "Admin"))
+    else if (SignInManager.IsSignedIn(User) && User.Claims.Any(c => c.Type == JwtClaimTypes.Role && c.Value == "Parents"))
     {
-        <div class="col-lg-6 col-6">
-            <!-- small box -->
-            <div class="small-box bg-gradient-green" style="margin: 10px 60px">
-                <div class="inner" style="height:150px">
-                    <h3>Orders</h3>
-
-                    <p>View all Available Orders</p>
-                </div>
-                <div class="icon">
-                    <i class="ion ion-bag"></i>
-                </div>
-                <a href="/orders" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-6 col-6">
-            <!-- small box -->
-            <div class="small-box bg-gradient-warning" style="margin: 10px 60px">
-                <div class="inner" style="height:150px">
-                    <h3> Profile</h3>
-
-                    <p>View your Personal Information</p>
-                </div>
-                <div class="icon">
-                    <i class="ion ion-person-add"></i>
-                </div>
-                <a href="/ShowUserProfile/@(userId)" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-        </div>
-
-        <div class="col-lg-6 col-6">
-            <!-- small box -->
-            <div class="small-box bg-gradient-cyan" style="margin: 10px 60px">
-                <div class="inner" style="height:150px">
-                    <h3> All Users</h3>
-
-                    <p>View your user details</p>
-                </div>
-                <div class="icon">
-                    <i class="ion ion-person-add"></i>
-                </div>
-                <a href="/userprofiles" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-        </div>
-        <div class="col-lg-6 col-6">
-            <!-- small box -->
-            <div class="small-box bg-gradient-teal" style="margin: 10px 60px">
-                <div class="inner" style="height:150px">
-                    <h3> Meal List</h3>
-
-                    <p>View existing meal list</p>
-                </div>
-                <div class="icon">
-                    <i class="ion ion-person-add"></i>
-                </div>
-                <a href="/mealmenus" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-        </div>
-
+        <h1 class="display-4">Your child's available balance: £@(Model.AvailableBalance)</h1>
     }
     else
     {
-        <div class="col-lg-6 col-6">
-            <!-- small box -->
-            <div class="small-box bg-gradient-warning" style="margin: 10px 60px">
-                <div class="inner" style="height:150px">
-                    <h3> Profile</h3>
-
-                    <p>View your Personal Information</p>
-                </div>
-                <div class="icon">
-                    <i class="ion ion-person-add"></i>
-                </div>
-                <a href="/ShowUserProfile/@(userId)" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-        </div>
-
-        <div class="col-lg-6 col-6">
-            <!-- small box -->
-            <div class="small-box bg-gradient-teal" style="margin: 10px 60px">
-                <div class="inner" style="height:150px">
-                    <h3> Balance</h3>
-
-                    <p>View your child's Account Balance</p>
-                </div>
-                <div class="icon">
-                    <i class="ion ion-stats-bars"></i>
-                </div>
-                <a href="/cards/parent/@(userId)" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-        </div>
+        <h1 class="display-4">Welcome to canteen reservation system</h1>
     }
-    <!-- ./col -->
-</div>
+    <!-- Small boxes (Stat box) -->
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <div class="row">
+
+            @if (SignInManager.IsSignedIn(User) && User.Claims.Any(c => c.Type == JwtClaimTypes.Role && c.Value == "Student"))
+            {
+                <!-- ./col -->
+                <div class="col-lg-6 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-gradient-cyan" style="margin: 10px 60px">
+                        <div class="inner" style="height:150px">
+                            <h3>Meals</h3>
+
+                            <p>View all meals</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-pie-graph"></i>
+                        </div>
+                        <a href="/mealmenus/studentMeallist" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-gradient-green" style="margin: 10px 60px">
+                        <div class="inner" style="height:150px">
+                            <h3>Orders</h3>
+
+                            <p>View your Orders</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-bag"></i>
+                        </div>
+                        <a href="/orders/studentorder/@(userId)" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <!-- ./col -->
+
+                <div class="col-lg-6 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-gradient-teal" style="margin: 10px 60px">
+                        <div class="inner" style="height:150px">
+                            <h3> Balance</h3>
+
+                            <p>View your Fund details</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-stats-bars"></i>
+                        </div>
+                        <a href="/cards/student/@(userId)" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- ./col -->
+                <div class="col-lg-6 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-gradient-warning" style="margin: 10px 60px">
+                        <div class="inner" style="height:150px">
+                            <h3>Profile</h3>
+
+                            <p>View your Personal Information</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-person-add"></i>
+                        </div>
+                        <a href="/ShowUserProfile/@(userId)" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+
+
+            }
+            else if (SignInManager.IsSignedIn(User) && User.Claims.Any(c => c.Type == JwtClaimTypes.Role && c.Value == "Admin"))
+            {
+                <div class="col-lg-6 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-gradient-green" style="margin: 10px 60px">
+                        <div class="inner" style="height:150px">
+                            <h3>Orders</h3>
+
+                            <p>View all Available Orders</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-bag"></i>
+                        </div>
+                        <a href="/orders" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-6 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-gradient-warning" style="margin: 10px 60px">
+                        <div class="inner" style="height:150px">
+                            <h3> Profile</h3>
+
+                            <p>View your Personal Information</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-person-add"></i>
+                        </div>
+                        <a href="/ShowUserProfile/@(userId)" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-gradient-cyan" style="margin: 10px 60px">
+                        <div class="inner" style="height:150px">
+                            <h3> All Users</h3>
+
+                            <p>View your user details</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-person-add"></i>
+                        </div>
+                        <a href="/userprofiles" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-gradient-teal" style="margin: 10px 60px">
+                        <div class="inner" style="height:150px">
+                            <h3> Meal List</h3>
+
+                            <p>View existing meal list</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-person-add"></i>
+                        </div>
+                        <a href="/mealmenus" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+
+            }
+            else
+            {
+                <div class="col-lg-6 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-gradient-warning" style="margin: 10px 60px">
+                        <div class="inner" style="height:150px">
+                            <h3> Profile</h3>
+
+                            <p>View your Personal Information</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-person-add"></i>
+                        </div>
+                        <a href="/ShowUserProfile/@(userId)" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-gradient-teal" style="margin: 10px 60px">
+                        <div class="inner" style="height:150px">
+                            <h3> Balance</h3>
+
+                            <p>View your child's Account Balance</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-stats-bars"></i>
+                        </div>
+                        <a href="/cards/parent/@(userId)" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+            }
+            <!-- ./col -->
+        </div>
         <!-- /.row -->
     }
     else
@@ -207,7 +218,7 @@
         <div class="home-banner">
             <img src="./images/home-page.jpg" class="img img-responsive" />
         </div>
-      
+
         <div class="home-login-banner">
             <a class="btn btn-default" href="/login">Go to login</a>
         </div>

@@ -26,14 +26,26 @@ namespace CanteenSystem.Web.Controllers
         // GET: Carts
         public async Task<IActionResult> Index(int userProfileId)
         {
-            var canteenSystemDbContext = _context.Carts.Include(c => c.MealMenu).Include(c => c.UserProfile);
+            var canteenSystemDbContext = _context.Carts.Include(c => c.MealMenu).Include(c => c.UserProfile)
+                .Include(c => c.MealMenu.MealMenuAvailabilities);
             var cartList = await canteenSystemDbContext.ToListAsync();
-
-            var expiredCardList = cartList.Where(x => x.MealAvailableDate < DateTime.Now);
-
-            if (expiredCardList != null && expiredCardList.Any())
+            var itemToRemove = new List<Cart>();
+            foreach (var item in cartList)
             {
-                _context.RemoveRange(expiredCardList);
+                var availableQuantity = item.MealMenu.MealMenuAvailabilities.
+                    FirstOrDefault(x => x.AvailabilityDate == item.MealAvailableDate)?.Quantity;
+                if (availableQuantity< item.Quantity)
+                {
+                    itemToRemove.Add(item);
+                }
+                if (item.MealAvailableDate < DateTime.Now)
+                {
+                    itemToRemove.Add(item);
+                }
+            } 
+            if (itemToRemove != null && itemToRemove.Any())
+            {
+                _context.RemoveRange(itemToRemove);
                 cartList = await _context.Carts.Include(c => c.MealMenu).Include(c => c.UserProfile).ToListAsync();
                   
             } 
@@ -310,6 +322,13 @@ namespace CanteenSystem.Web.Controllers
                     };
                     _context.Add(payment);
                     _context.SaveChanges();
+                    var cardDetail = await _context.Cards.Where(x => x.UserProfileId == model.UserProfileId).FirstOrDefaultAsync();
+                    if(cardDetail != null)
+                    { 
+                        cardDetail.AvailableBalance = cardDetail.AvailableBalance - totalPrice;
+                        _context.Update(cardDetail);
+                        _context.SaveChanges();
+                    }
                     var cartToBeRemoved = _context.Carts.Where(c => c.UserProfileId == model.UserProfileId);
                     _context.Carts.RemoveRange(cartToBeRemoved);
                     await _context.SaveChangesAsync();

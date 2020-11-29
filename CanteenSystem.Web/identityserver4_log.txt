@@ -4416,3 +4416,101 @@ System.NotImplementedException: The method or operation is not implemented.
 2020-11-29 16:55:39.405 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
 2020-11-29 16:55:40.753 +00:00 [WRN] No type was specified for the decimal property 'AvailableBalance' on entity type 'Card'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
 2020-11-29 16:55:44.548 +00:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2020-11-29 21:27:55.880 +00:00 [INF] Starting host...
+2020-11-29 21:27:58.752 +00:00 [WRN] 'AddEntityFramework*' was called on the service provider, but 'UseInternalServiceProvider' wasn't called in the DbContext options configuration. Consider removing the 'AddEntityFramework*' call, as in most cases it's not needed and may cause conflicts with other products and services registered in the same service provider.
+2020-11-29 21:28:00.229 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-29 21:28:06.764 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-29 21:28:09.144 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-29 21:28:09.220 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-29 21:28:09.220 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-29 21:28:43.711 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-29 21:28:44.454 +00:00 [WRN] No type was specified for the decimal property 'AvailableBalance' on entity type 'Card'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+2020-11-29 21:28:48.698 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-29 21:29:03.460 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-29 21:29:03.947 +00:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2020-11-29 21:40:48.094 +00:00 [INF] Starting host...
+2020-11-29 21:40:50.920 +00:00 [WRN] 'AddEntityFramework*' was called on the service provider, but 'UseInternalServiceProvider' wasn't called in the DbContext options configuration. Consider removing the 'AddEntityFramework*' call, as in most cases it's not needed and may cause conflicts with other products and services registered in the same service provider.
+2020-11-29 21:40:52.448 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-29 21:40:55.399 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-29 21:40:58.730 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-29 21:40:59.449 +00:00 [WRN] No type was specified for the decimal property 'AvailableBalance' on entity type 'Card'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+2020-11-29 21:41:01.550 +00:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2020-11-29 21:41:11.700 +00:00 [ERR] An unhandled exception has occurred while executing the request.
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at CanteenSystem.Web.Controllers.HomeController.Index() in /Users/dhakshanyavijay/Documents/GitHub/CanteenSystem/CanteenSystem.Web/Controllers/HomeController.cs:line 45
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2020-11-29 21:41:30.110 +00:00 [INF] Starting host...
+2020-11-29 21:41:32.717 +00:00 [WRN] 'AddEntityFramework*' was called on the service provider, but 'UseInternalServiceProvider' wasn't called in the DbContext options configuration. Consider removing the 'AddEntityFramework*' call, as in most cases it's not needed and may cause conflicts with other products and services registered in the same service provider.
+2020-11-29 21:41:34.858 +00:00 [WRN] No type was specified for the decimal property 'AvailableBalance' on entity type 'Card'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+2020-11-29 21:41:42.819 +00:00 [INF] AuthenticationScheme: Identity.Application signed out.
+2020-11-29 21:41:42.821 +00:00 [INF] AuthenticationScheme: Identity.External signed out.
+2020-11-29 21:41:42.821 +00:00 [INF] AuthenticationScheme: Identity.TwoFactorUserId signed out.
+2020-11-29 21:41:50.708 +00:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2020-11-29 21:42:01.423 +00:00 [INF] AuthenticationScheme: Identity.Application signed out.
+2020-11-29 21:42:01.426 +00:00 [INF] AuthenticationScheme: Identity.External signed out.
+2020-11-29 21:42:01.430 +00:00 [INF] AuthenticationScheme: Identity.TwoFactorUserId signed out.
+2020-11-29 21:42:08.553 +00:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2020-11-29 21:42:47.101 +00:00 [INF] AuthenticationScheme: Identity.Application signed out.
+2020-11-29 21:42:47.101 +00:00 [INF] AuthenticationScheme: Identity.External signed out.
+2020-11-29 21:42:47.102 +00:00 [INF] AuthenticationScheme: Identity.TwoFactorUserId signed out.
+2020-11-29 21:42:52.531 +00:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2020-11-29 21:43:08.593 +00:00 [INF] AuthenticationScheme: Identity.Application signed out.
+2020-11-29 21:43:08.596 +00:00 [INF] AuthenticationScheme: Identity.External signed out.
+2020-11-29 21:43:08.597 +00:00 [INF] AuthenticationScheme: Identity.TwoFactorUserId signed out.
+2020-11-29 21:43:41.263 +00:00 [INF] Starting host...
+2020-11-29 21:43:43.988 +00:00 [WRN] 'AddEntityFramework*' was called on the service provider, but 'UseInternalServiceProvider' wasn't called in the DbContext options configuration. Consider removing the 'AddEntityFramework*' call, as in most cases it's not needed and may cause conflicts with other products and services registered in the same service provider.
+2020-11-29 21:43:56.033 +00:00 [WRN] No type was specified for the decimal property 'AvailableBalance' on entity type 'Card'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+2020-11-29 21:43:58.094 +00:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2020-11-29 21:48:39.291 +00:00 [INF] Starting host...
+2020-11-29 21:48:42.200 +00:00 [WRN] 'AddEntityFramework*' was called on the service provider, but 'UseInternalServiceProvider' wasn't called in the DbContext options configuration. Consider removing the 'AddEntityFramework*' call, as in most cases it's not needed and may cause conflicts with other products and services registered in the same service provider.
+2020-11-29 21:48:54.660 +00:00 [WRN] No type was specified for the decimal property 'AvailableBalance' on entity type 'Card'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+2020-11-29 21:50:42.029 +00:00 [INF] AuthenticationScheme: Identity.Application signed out.
+2020-11-29 21:50:42.031 +00:00 [INF] AuthenticationScheme: Identity.External signed out.
+2020-11-29 21:50:42.031 +00:00 [INF] AuthenticationScheme: Identity.TwoFactorUserId signed out.
+2020-11-29 21:50:47.550 +00:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2020-11-29 21:59:26.765 +00:00 [INF] Starting host...
+2020-11-29 21:59:30.832 +00:00 [WRN] 'AddEntityFramework*' was called on the service provider, but 'UseInternalServiceProvider' wasn't called in the DbContext options configuration. Consider removing the 'AddEntityFramework*' call, as in most cases it's not needed and may cause conflicts with other products and services registered in the same service provider.
+2020-11-29 21:59:32.282 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-29 21:59:35.427 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-29 21:59:40.423 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-29 21:59:41.221 +00:00 [WRN] No type was specified for the decimal property 'AvailableBalance' on entity type 'Card'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+2020-11-29 21:59:43.404 +00:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2020-11-29 22:02:51.512 +00:00 [INF] Starting host...
+2020-11-29 22:02:54.278 +00:00 [WRN] 'AddEntityFramework*' was called on the service provider, but 'UseInternalServiceProvider' wasn't called in the DbContext options configuration. Consider removing the 'AddEntityFramework*' call, as in most cases it's not needed and may cause conflicts with other products and services registered in the same service provider.
+2020-11-29 22:02:56.570 +00:00 [WRN] No type was specified for the decimal property 'AvailableBalance' on entity type 'Card'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+2020-11-29 22:03:34.393 +00:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2020-11-29 22:06:41.464 +00:00 [INF] Starting host...
+2020-11-29 22:06:44.057 +00:00 [WRN] 'AddEntityFramework*' was called on the service provider, but 'UseInternalServiceProvider' wasn't called in the DbContext options configuration. Consider removing the 'AddEntityFramework*' call, as in most cases it's not needed and may cause conflicts with other products and services registered in the same service provider.
+2020-11-29 22:06:46.375 +00:00 [WRN] No type was specified for the decimal property 'AvailableBalance' on entity type 'Card'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+2020-11-29 22:09:12.603 +00:00 [INF] Starting host...
+2020-11-29 22:09:15.701 +00:00 [WRN] 'AddEntityFramework*' was called on the service provider, but 'UseInternalServiceProvider' wasn't called in the DbContext options configuration. Consider removing the 'AddEntityFramework*' call, as in most cases it's not needed and may cause conflicts with other products and services registered in the same service provider.
+2020-11-29 22:09:32.692 +00:00 [INF] Starting host...
+2020-11-29 22:09:35.262 +00:00 [WRN] 'AddEntityFramework*' was called on the service provider, but 'UseInternalServiceProvider' wasn't called in the DbContext options configuration. Consider removing the 'AddEntityFramework*' call, as in most cases it's not needed and may cause conflicts with other products and services registered in the same service provider.
+2020-11-29 22:09:37.763 +00:00 [WRN] No type was specified for the decimal property 'AvailableBalance' on entity type 'Card'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+2020-11-29 22:11:13.351 +00:00 [INF] AuthenticationScheme: Identity.Application signed out.
+2020-11-29 22:11:13.354 +00:00 [INF] AuthenticationScheme: Identity.External signed out.
+2020-11-29 22:11:13.355 +00:00 [INF] AuthenticationScheme: Identity.TwoFactorUserId signed out.
+2020-11-29 22:11:19.449 +00:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2020-11-29 22:14:41.511 +00:00 [INF] Starting host...
+2020-11-29 22:14:44.300 +00:00 [WRN] 'AddEntityFramework*' was called on the service provider, but 'UseInternalServiceProvider' wasn't called in the DbContext options configuration. Consider removing the 'AddEntityFramework*' call, as in most cases it's not needed and may cause conflicts with other products and services registered in the same service provider.
+2020-11-29 22:14:51.365 +00:00 [WRN] No type was specified for the decimal property 'AvailableBalance' on entity type 'Card'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
