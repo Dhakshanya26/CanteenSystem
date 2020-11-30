@@ -4563,3 +4563,13 @@ System.NullReferenceException: Object reference not set to an instance of an obj
 2020-11-29 23:03:12.037 +00:00 [INF] Starting host...
 2020-11-29 23:03:14.557 +00:00 [WRN] 'AddEntityFramework*' was called on the service provider, but 'UseInternalServiceProvider' wasn't called in the DbContext options configuration. Consider removing the 'AddEntityFramework*' call, as in most cases it's not needed and may cause conflicts with other products and services registered in the same service provider.
 2020-11-29 23:03:16.915 +00:00 [WRN] No type was specified for the decimal property 'AvailableBalance' on entity type 'Card'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+2020-11-29 23:06:22.981 +00:00 [INF] AuthenticationScheme: Identity.Application signed out.
+2020-11-29 23:06:22.983 +00:00 [INF] AuthenticationScheme: Identity.External signed out.
+2020-11-29 23:06:22.983 +00:00 [INF] AuthenticationScheme: Identity.TwoFactorUserId signed out.
+2020-11-29 23:06:27.496 +00:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2020-11-29 23:07:43.628 +00:00 [INF] AuthenticationScheme: Identity.Application signed out.
+2020-11-29 23:07:43.629 +00:00 [INF] AuthenticationScheme: Identity.External signed out.
+2020-11-29 23:07:43.630 +00:00 [INF] AuthenticationScheme: Identity.TwoFactorUserId signed out.
+2020-11-30 11:48:13.955 +00:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2020-11-30 11:54:25.136 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
+2020-11-30 11:54:29.572 +00:00 [INF] Identity.Application was not authenticated. Failure message: Ticket expired
