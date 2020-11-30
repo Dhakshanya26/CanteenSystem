@@ -4,64 +4,64 @@
     ViewData["Title"] = "Index";
 }
 
-<h4>User list</h4>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EmailAddress)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RollNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Department)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsVerified)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Role)
-            </th>
-
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+<h4>User list</h4><div id="style-7" class="scrollbar">
+    <table class="table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EmailAddress)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RollNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Department)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IsVerified)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Role)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EmailAddress)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RollNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Department)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsVerified)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Role)
+                </th>
 
-<div class="text-center">
-    <a class="btn btn-default" href="/home">Go to Home</a>
-</div>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmailAddress)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RollNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Department)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsVerified)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Role)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    </div>
+    <div class="text-center">
+        <a class="btn btn-default" href="/home">Go to Home</a>
+    </div>

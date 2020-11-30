@@ -15,98 +15,109 @@
     var availableBalance = Model?.FirstOrDefault()?.UserProfile?.Cards?.FirstOrDefault().AvailableBalance;
 
 }
-
+<style>
+    td {
+        vertical-align: middle !important;
+    }
+</style>
 <h1>Your Cart</h1>
-<h3>Total price - £@(totalPrice)</h3>
+
 <h6>Note: The system will automatically remove unavailable meal from the cart. </h6>
-@if (availableBalance == 0)
+@if (Model != null && Model.Any())
 {
-<h6>Note: Your available balance is zero. so, you can't order </h6>
+    <h3>Total price - £@(totalPrice)</h3>
+    @if (availableBalance == 0)
+    {
+        <h6>Note: Your available balance is zero. so, you can't order </h6>
+    }
 }
 <div class="alert " style="display:none" id="statusMessage"> </div>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-               Image
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MealMenu)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Quantity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                Total price
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MealAvailableDate)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @if (Model == null || !Model.Any())
-        {
-            <tr class="no-record-found">
-                <td colspan="6">
-                    <span> No records found</span>
+<div  id="style-7" class="scrollbar">
 
-                </td>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Image
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MealMenu)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quantity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    Total price
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MealAvailableDate)
+                </th>
+                <th></th>
             </tr>
-        }
-        else
-        {
+        </thead>
+        <tbody>
+            @if (Model == null || !Model.Any())
+            {
+                <tr class="no-record-found">
+                    <td colspan="6">
+                        <span> No records found</span>
 
-            foreach (var item in Model)
-            {
-    <tr>
-        <td>
-            @if (string.IsNullOrEmpty(item.MealMenu.ImageName))
-            {
-                <img src="/images/no-image.png" alt="Image name" height="100px" width="100px" />
+                    </td>
+                </tr>
             }
             else
             {
-                <img src="/images/@item.MealMenu.ImageName" alt="Image name" height="100px" width="100px" />
-            }
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MealMenu.MealName)
-        </td>
-        <td>
-            @Html.DropDownListFor(modelItem => item.Quantity, new SelectList(new List<SelectListItem> {
-           new SelectListItem("1","1"),
-           new SelectListItem("2","2"),
-           new SelectListItem("3","3"),
-           new SelectListItem("4","4")
-    }, "Text", "Value"), new
-            {
-                onchange = @"updateQuantity(this.value" + "," + (item.Id) + ",'" + (item.MealMenu.MealName) + "')"
-            })
-        </td>
-        <td>
-            £@Html.DisplayFor(modelItem => item.Price)
-        </td>
 
-        <td>
-            £@(item.Price * item.Quantity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MealAvailableDate)
-        </td>
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @if (string.IsNullOrEmpty(item.MealMenu.ImageName))
+                            {
+                                <img src="/images/no-image.png" alt="Image name" height="60px" width="60px" />
+                            }
+                            else
+                            {
+                                <img src="/images/@item.MealMenu.ImageName" alt="Image name" height="60px" width="60px" />
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MealMenu.MealName)
+                        </td>
+                        <td>
+                            @Html.DropDownListFor(modelItem => item.Quantity, new SelectList(new List<SelectListItem> {
+                           new SelectListItem("1","1"),
+                           new SelectListItem("2","2"),
+                           new SelectListItem("3","3"),
+                           new SelectListItem("4","4")
+                    }, "Text", "Value"), new
+                            {
+                                onchange = @"updateQuantity(this.value" + "," + (item.Id) + ",'" + (item.MealMenu.MealName) + "')"
+                            })
+                        </td>
+                        <td>
+                            £@Html.DisplayFor(modelItem => item.Price)
+                        </td>
 
-        <td>
-            <a onclick="removeFromCart(@(item.Id),'@(item.MealMenu.MealName)')" href="#">Remove</a>
-        </td>
-    </tr>
+                        <td>
+                            £@(item.Price * item.Quantity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MealAvailableDate)
+                        </td>
+
+                        <td>
+                            <a onclick="removeFromCart(@(item.Id),'@(item.MealMenu.MealName)')" href="#">Remove</a>
+                        </td>
+                    </tr>
+                }
             }
-        }
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</div>
 
 @if (Model == null || !Model.Any())
 {
@@ -116,18 +127,18 @@
 }
 else
 {
-<div class="text-center">
-    @if (availableBalance == 0)
-    {
-        <a type="button" disabled class="btn btn-primary" href="/carts/confirmOrderAndPayNow/@(userId)"> Confirm Order and Pay Now</a>
-        <a type="button" disabled class="btn btn-secondary" href="/carts/confirmOrderAndPayAtTill/@(userId)"> Confirm Order and Pay at Till</a>
-    }
-    else
-    {
-        <a type="button" class="btn btn-primary" href="/carts/confirmOrderAndPayNow/@(userId)"> Confirm Order and Pay Now</a>
-        <a type="button" class="btn btn-secondary" href="/carts/confirmOrderAndPayAtTill/@(userId)"> Confirm Order and Pay at Till</a>
-    }
-</div>
+    <div class="text-center">
+        @if (availableBalance == 0)
+        {
+            <a type="button" disabled class="btn btn-primary" href="/carts/confirmOrderAndPayNow/@(userId)"> Confirm Order and Pay Now</a>
+            <a type="button" disabled class="btn btn-secondary" href="/carts/confirmOrderAndPayAtTill/@(userId)"> Confirm Order and Pay at Till</a>
+        }
+        else
+        {
+            <a type="button" class="btn btn-primary" href="/carts/confirmOrderAndPayNow/@(userId)"> Confirm Order and Pay Now</a>
+            <a type="button" class="btn btn-secondary" href="/carts/confirmOrderAndPayAtTill/@(userId)"> Confirm Order and Pay at Till</a>
+        }
+    </div>
 }
 <script>function updateQuantity(selectedQuantity, cartId, menuName) {
         $.ajax({

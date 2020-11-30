@@ -61,110 +61,111 @@
 <br />
 <br />
 <div class="alert " style="display:none" id="statusMessage"> </div>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Image
-            </th>
-            <th>
-                Name
-            </th>
-            <th>
-                Discount
-            </th>
-            <th>
-                Price
-            </th>
-            <th>
-                AvailableDate
-            </th>
-            <th>
-                MealType
-            </th>
+<div style="overflow-y: scroll; max-height: 500px;" id="style-7" class="scrollbar">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Image
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Discount
+                </th>
+                <th>
+                    Price
+                </th>
+                <th>
+                    AvailableDate
+                </th>
+                <th>
+                    MealType
+                </th>
 
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @if (Model.MealMenuModels == null || !Model.MealMenuModels.Any())
-        {
-            <tr class="no-record-found">
-                <td colspan="6">
-                    <span> No records found</span>
-
-                </td>
+                <th></th>
             </tr>
-        }
-        else
-        {
-            foreach (var item in Model.MealMenuModels)
+        </thead>
+        <tbody>
+            @if (Model.MealMenuModels == null || !Model.MealMenuModels.Any())
             {
-    <tr>
-        <td>
-            @if (string.IsNullOrEmpty(item.ImageName))
-            {
-                <img src="/images/no-image.png" alt="Image name" height="100px" width="100px" />
+                <tr class="no-record-found">
+                    <td colspan="6">
+                        <span> No records found</span>
+
+                    </td>
+                </tr>
             }
             else
             {
-                <img src="/images/@item.ImageName" alt="Image name" height="100px" width="100px" />
-            }
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @(item.DiscountName != null ? item.DiscountName: "N/A")
-        </td>
-        <td>
-            @if (item.WasPrice != default)
-            {
-                <span style=" text-decoration: line-through;"> £ @item.WasPrice</span>
-            }
-            <span> £@item.Price</span>
-        </td>
-        <td>
-            @item.AvailableDate.Date.ToString("dd/MM/yyyy")
-        </td>
-        <td>
-            @item.MealType
-        </td>
-        <td>
-            <a onclick="addToCart(@(item.Id),@(item.AvailabililtyDateId),@(userId),'@(item.Name)')" href="#">Add to Card</a>
-        </td>
-    </tr>
-            }
-        }
-    </tbody>
-</table>
-
-
-<div class="text-center">
-    <a id="CancelBtn" class="btn btn-default" href="/home">Back to Home</a>
-</div>
-<script>function addToCart(menuId, availabilityDateId, userId, menuName) {
-        $.ajax({
-            method: "post",
-            url: "/carts/AddToCart/" + menuId + "/" + availabilityDateId + "/" + userId,
-            success: function (result) {
-                $('#statusMessage').show();
-                if (result.status) {
-
-                    $('#statusMessage').addClass("alert-success  w-100");
-                    $('#statusMessage').html("<span>" + menuName + " is added to the cart</span>");
-                } else {
-                    $('#statusMessage').addClass("alert-danger  w-100");
-                    $('#statusMessage').html("<span>" + menuName + " has already been added to the cart</span>");
+                foreach (var item in Model.MealMenuModels)
+                {
+                    <tr>
+                        <td>
+                            @if (string.IsNullOrEmpty(item.ImageName))
+                            {
+                                <img src="/images/no-image.png" alt="Image name" height="60px" width="60px" />
+                            }
+                            else
+                            {
+                                <img src="/images/@item.ImageName" alt="Image name" height="60px" width="60px" />
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @(item.DiscountName != null ? item.DiscountName: "N/A")
+                        </td>
+                        <td>
+                            @if (item.WasPrice != default)
+                            {
+                                <span style=" text-decoration: line-through;"> £ @item.WasPrice</span>
+                            }
+                            <span> £@item.Price</span>
+                        </td>
+                        <td>
+                            @item.AvailableDate.Date.ToString("dd/MM/yyyy")
+                        </td>
+                        <td>
+                            @item.MealType
+                        </td>
+                        <td>
+                            <a onclick="addToCart(@(item.Id),@(item.AvailabililtyDateId),@(userId),'@(item.Name)')" href="#">Add to Card</a>
+                        </td>
+                    </tr>
                 }
-                setTimeout(hideStatusMessage, 2000);
             }
-        });
-    }
+        </tbody>
+    </table>
+    </div>
 
-    function getAllMeals() {
-        window.location.href = "/mealmenus/StudentMealList";
-    }
-    function hideStatusMessage() {
-        $('#statusMessage').hide();
-    }</script>
+    <div class="text-center">
+        <a id="CancelBtn" class="btn btn-default" href="/home">Back to Home</a>
+    </div>
+    <script>function addToCart(menuId, availabilityDateId, userId, menuName) {
+            $.ajax({
+                method: "post",
+                url: "/carts/AddToCart/" + menuId + "/" + availabilityDateId + "/" + userId,
+                success: function (result) {
+                    $('#statusMessage').show();
+                    if (result.status) {
+
+                        $('#statusMessage').addClass("alert-success  w-100");
+                        $('#statusMessage').html("<span>" + menuName + " is added to the cart</span>");
+                    } else {
+                        $('#statusMessage').addClass("alert-danger  w-100");
+                        $('#statusMessage').html("<span>" + menuName + " has already been added to the cart</span>");
+                    }
+                    setTimeout(hideStatusMessage, 2000);
+                }
+            });
+        }
+
+        function getAllMeals() {
+            window.location.href = "/mealmenus/StudentMealList";
+        }
+        function hideStatusMessage() {
+            $('#statusMessage').hide();
+        }</script>
