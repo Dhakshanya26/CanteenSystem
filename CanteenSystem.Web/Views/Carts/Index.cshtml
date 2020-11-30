@@ -11,15 +11,25 @@
     ViewData["Title"] = "Cart";
     var userClaimId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.UserData);
     var userId = userClaimId == null ? 0 : Convert.ToInt32(userClaimId.Value);
-    var totalPrice = Model.Sum(c => c.Quantity * c.Price);
+    var totalPrice = Model?.Sum(c => c.Quantity * c.Price);
+    var availableBalance = Model?.FirstOrDefault()?.UserProfile?.Cards?.FirstOrDefault().AvailableBalance;
+
 }
 
 <h1>Your Cart</h1>
 <h3>Total price - £@(totalPrice)</h3>
+<h6>Note: The system will automatically remove unavailable meal from the cart. </h6>
+@if (availableBalance == 0)
+{
+<h6>Note: Your available balance is zero. so, you can't order </h6>
+}
 <div class="alert " style="display:none" id="statusMessage"> </div>
 <table class="table">
     <thead>
         <tr>
+            <th>
+               Image
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.MealMenu)
             </th>
@@ -30,7 +40,7 @@
                 @Html.DisplayNameFor(model => model.Price)
             </th>
             <th>
-               Total price
+                Total price
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.MealAvailableDate)
@@ -55,6 +65,16 @@
             {
     <tr>
         <td>
+            @if (string.IsNullOrEmpty(item.MealMenu.ImageName))
+            {
+                <img src="/images/no-image.png" alt="Image name" height="100px" width="100px" />
+            }
+            else
+            {
+                <img src="/images/@item.MealMenu.ImageName" alt="Image name" height="100px" width="100px" />
+            }
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.MealMenu.MealName)
         </td>
         <td>
@@ -73,7 +93,7 @@
         </td>
 
         <td>
-             £@(item.Price * item.Quantity)
+            £@(item.Price * item.Quantity)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.MealAvailableDate)
@@ -96,12 +116,18 @@
 }
 else
 {
-    <div class="text-center">
-
+<div class="text-center">
+    @if (availableBalance == 0)
+    {
+        <a type="button" disabled class="btn btn-primary" href="/carts/confirmOrderAndPayNow/@(userId)"> Confirm Order and Pay Now</a>
+        <a type="button" disabled class="btn btn-secondary" href="/carts/confirmOrderAndPayAtTill/@(userId)"> Confirm Order and Pay at Till</a>
+    }
+    else
+    {
         <a type="button" class="btn btn-primary" href="/carts/confirmOrderAndPayNow/@(userId)"> Confirm Order and Pay Now</a>
         <a type="button" class="btn btn-secondary" href="/carts/confirmOrderAndPayAtTill/@(userId)"> Confirm Order and Pay at Till</a>
-
-    </div>
+    }
+</div>
 }
 <script>function updateQuantity(selectedQuantity, cartId, menuName) {
         $.ajax({

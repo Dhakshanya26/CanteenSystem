@@ -27,6 +27,7 @@ namespace CanteenSystem.Web.Controllers
         public async Task<IActionResult> Index(int userProfileId)
         {
             var canteenSystemDbContext = _context.Carts.Include(c => c.MealMenu).Include(c => c.UserProfile)
+                .Include(c => c.UserProfile.Cards)
                 .Include(c => c.MealMenu.MealMenuAvailabilities);
             var cartList = await canteenSystemDbContext.ToListAsync();
             var itemToRemove = new List<Cart>();
