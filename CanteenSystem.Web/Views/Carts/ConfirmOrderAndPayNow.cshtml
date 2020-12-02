@@ -33,7 +33,7 @@
     .inner-div {
         margin: 0 auto;
         width: 500px;
-        height: 500px;
+        height: 232px;
         color: white;
         background: rgb(2,0,36);
         padding: 30px;
@@ -51,26 +51,7 @@
                 @Html.TextBoxFor(x => x.Amount, new { @class = "form-control", @type = "number" ,@readonly="true" })
 
             </div>
-            <div class="form-row">
-                <label for="CardNumber">Your Debit Card Number</label>
-                @Html.TextBoxFor(x => x.BankCardNumber, new { @class = "form-control", @type = "number", @Value = "" })
-
-            </div>
-
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="ExpiryMonth">Expiry Month</label>
-                    @Html.TextBoxFor(x => x.ExpiryMonth, new { @class = "form-control", @type = "number", @Value = "" })
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="ExpiryYear">Expiry Year</label>
-                    @Html.TextBoxFor(x => x.ExpiryYear, new { @class = "form-control", @type = "number", @Value = "" })
-                </div>
-            </div>
-            <div class="form-row">
-                <label for="CVV">CVV</label>
-                @Html.TextBoxFor(x => x.CVV, new { @class = "form-control", @type = "number", @Value = "" })
-            </div>
+            
             @Html.HiddenFor(x => x.CardId)
             @Html.HiddenFor(x => x.UserProfileId)
 

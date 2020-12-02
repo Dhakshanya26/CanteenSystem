@@ -253,44 +253,8 @@ namespace CanteenSystem.Web.Controllers
         {
             try
             { 
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            } 
-                var isInvalid = false;
-                if (model.BankCardNumber != 42424242)
-                {
-                    isInvalid = true;
-                    ModelState.AddModelError("error", "Enter a valid card number. example test data:42424242 ");
-
-                }
-                if (!(model.ExpiryMonth >= 01 && model.ExpiryMonth <= 12))
-                {
-                    isInvalid = true;
-                    ModelState.AddModelError("error", "Enter a valid Expiry month. example test data:01 to 12 ");
-
-                }
-                if (!(model.ExpiryYear >= 2020 && model.ExpiryYear <= 2050))
-                {
-                    isInvalid = true;
-                    ModelState.AddModelError("error", "Enter a valid Expiry Year. example test data:2020 to 2050 ");
-                }
-                if (!(model.CVV >= 100 && model.CVV <= 999))
-                {
-                    isInvalid = true;
-                    ModelState.AddModelError("error", "Enter a valid CVV. example test data:111 ");
-                }
-                if (model.Amount <= 0)
-                {
-                    isInvalid = true;
-                    ModelState.AddModelError("error", "Amount must be greater than 0");
-                }
-
-                if (isInvalid)
-                {
-                    return View("AddStudentFund", model);
-                }
-
+             
+         
                 Random generator = new Random();
                 int r = generator.Next(1000, 10000000);
                 var orderReferenceNumber = $"ORDER{r}";
