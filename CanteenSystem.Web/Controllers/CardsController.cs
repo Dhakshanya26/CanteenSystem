@@ -2,19 +2,16 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CanteenSystem.Web.ViewModel;
-using CanteenSystem.Dal;
-using CanteenSystem.Service;
+using CanteenSystem.Dal; 
 
 namespace CanteenSystem.Web.Controllers
 {
     public class CardsController : Controller
     {
-        private readonly CanteenSystemDbContext _context;
-        private readonly ICardsService _cardsservice;
-        public CardsController(CanteenSystemDbContext context, ICardsService cardsservice)
+        private readonly CanteenSystemDbContext _context; 
+        public CardsController(CanteenSystemDbContext context)
         {
-            _context = context;
-            _cardsservice = cardsservice;
+            _context = context; 
         }
 
 

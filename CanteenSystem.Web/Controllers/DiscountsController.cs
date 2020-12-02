@@ -7,19 +7,16 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using IdentityModel;
 using CanteenSystem.Dto.Models;
-using CanteenSystem.Dal;
-using CanteenSystem.Service;
+using CanteenSystem.Dal; 
 
 namespace CanteenSystem.Web.Controllers
 {
     public class DiscountsController : Controller
     {
-        private readonly CanteenSystemDbContext Context;
-        private readonly IDiscountsService _DiscountsService;
-        public DiscountsController(CanteenSystemDbContext context, IDiscountsService DiscountsService)
+        private readonly CanteenSystemDbContext Context; 
+        public DiscountsController(CanteenSystemDbContext context )
         {
-            Context = context;
-            _DiscountsService = DiscountsService;
+            Context = context; 
         }
 
 

@@ -1967,7 +1967,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CanteenSystem.Dal\CanteenSystem.Dal.csproj" />
-    <ProjectReference Include="..\CanteenSystem.Service\CanteenSystem.Service.csproj" />
     <ProjectReference Include="..\CanteenSystem.Dto\CanteenSystem.Dto.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>

@@ -2,8 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using CanteenSystem.Service;
+using System.Threading.Tasks; 
 using CanteenSystem.Web.Controllers;
 using CanteenSystem.Dto.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -48,9 +47,7 @@ namespace CanteenSystem.Web
             services.AddAuthentication();
             services.ConfigureApplicationCookie(o => o.LoginPath = "/Login");
             services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, CustomClaimsFactory>();
-            services.AddScoped<ICardsService, Cardsservice>();
-            services.AddScoped<IDiscountsService, DiscountsService>();
-            services.AddScoped<ICartsService, CartsService>();
+            
             services.Configure<IdentityOptions>(options =>
             {   
                 // Lockout settings.
