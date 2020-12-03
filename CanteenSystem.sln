@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CanteenSystem.Dal", "Cantee
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CanteenSystem.Web", "CanteenSystem.Web\CanteenSystem.Web.csproj", "{6BDEBD86-F4EB-478F-8040-FD398D19425F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CanteenSystem.Web.Test", "CanteenSystem.Web.Test\CanteenSystem.Web.Test.csproj", "{2EC0AA30-49AE-460D-8EA0-FAF03F4C8263}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CanteenSystem.Web.Tests", "CanteenSystem.Web.Tests\CanteenSystem.Web.Tests.csproj", "{5C52FF76-7F64-444E-AB4A-125DB7450F5E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{6BDEBD86-F4EB-478F-8040-FD398D19425F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6BDEBD86-F4EB-478F-8040-FD398D19425F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6BDEBD86-F4EB-478F-8040-FD398D19425F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2EC0AA30-49AE-460D-8EA0-FAF03F4C8263}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2EC0AA30-49AE-460D-8EA0-FAF03F4C8263}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2EC0AA30-49AE-460D-8EA0-FAF03F4C8263}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2EC0AA30-49AE-460D-8EA0-FAF03F4C8263}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C52FF76-7F64-444E-AB4A-125DB7450F5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C52FF76-7F64-444E-AB4A-125DB7450F5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C52FF76-7F64-444E-AB4A-125DB7450F5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C52FF76-7F64-444E-AB4A-125DB7450F5E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

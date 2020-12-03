@@ -7,16 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NUnit" Version="3.12.0" />
-    <PackageReference Include="NUnit3TestAdapter" Version="3.16.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
-    <PackageReference Include="xunit" Version="2.4.1" />
-    <PackageReference Include="xunit.core" Version="2.4.1" />
+    <PackageReference Include="xunit" Version="2.4.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
+    <PackageReference Include="coverlet.collector" Version="1.2.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CanteenSystem.Web\CanteenSystem.Web.csproj" />
     <ProjectReference Include="..\CanteenSystem.Dto\CanteenSystem.Dto.csproj" />
     <ProjectReference Include="..\CanteenSystem.Dal\CanteenSystem.Dal.csproj" />
+    <ProjectReference Include="..\CanteenSystem.Web\CanteenSystem.Web.csproj" />
   </ItemGroup>
 </Project>
